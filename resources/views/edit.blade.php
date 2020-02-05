@@ -46,13 +46,15 @@
                     </label>
                 </div>
                 <div class="form-group">
-                    <label for="corps">Corps</label>
-                    <textarea rows="8" cols="50" class="form-control" placeholder="corps" name="corps"></textarea>
+                    <label for="corps">Corps
+                        <textarea rows="8" cols="50" class="form-control" placeholder="corps"
+                                  name="corps">{{ $courrier->corps }}</textarea>
+                    </label>
                 </div>
                 <div class="form-group">
                     <label for="comments">Comments
                         <textarea rows="8" cols="50" class="form-control" placeholder="comments"
-                                  name="comments"></textarea>
+                                  name="comments">{{ $courrier->comments }}</textarea>
                     </label>
 
                 </div>
@@ -81,7 +83,7 @@
                 <div class="form-group">
                     <input type="hidden" value="2" name="status"/>
                 </div>
-                <button type="submit" class="btn btn-block btn-danger">Update User</button>
+                <button type="submit" class="btn btn-block btn-danger">Update Courrier</button>
             </form>
         </div>
     </div>
