@@ -8,6 +8,7 @@
         }
     </style>
 
+    <h1>Admin</h1>
     <div class="push-top">
         @if(session()->get('success'))
             <div class="alert alert-success">
@@ -46,9 +47,9 @@
                     <td>{{$courriers->status}}</td>
                     <td>{{$courriers->receptionDate}}</td>
                     <td>
-                        <a href="{{ route('courriers.show', $courriers->id)}}" class="btn btn-primary btn-sm">Show</a>
-                        <a href="{{ route('courriers.edit', $courriers->id)}}" class="btn btn-primary btn-sm">Edit</a>
-                        <form action="{{ route('courriers.destroy', $courriers->id)}}" method="post" style="display: inline-block">
+                        <a href="{{ route('courriers_admin.show', $courriers->id)}}" class="btn btn-primary btn-sm">Show</a>
+                        <a href="{{ route('courriers_admin.edit', $courriers->id)}}" class="btn btn-primary btn-sm">Edit</a>
+                        <form action="{{ route('courriers_admin.destroy', $courriers->id)}}" method="post" style="display: inline-block" onsubmit="return confirm('Are you sure?');">
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-danger btn-sm" type="submit">Delete</button>

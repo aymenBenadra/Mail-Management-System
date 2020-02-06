@@ -1,6 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+    <style>
+        .top-right {
+            position: absolute;
+            right: 10px;
+            top: 18px;
+        }
+        .links > a {
+            color: #636b6f;
+            padding: 0 25px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: .1rem;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+    </style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -8,8 +24,13 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 </head>
 <body>
-<a href="/login">Login</a>
-<a href="/logout">Logout</a>
+<div class="top-right links">
+    @auth
+        <a href="{{ url('logout') }}">Logout</a>
+    @else
+        <a href="{{ route('login') }}">Login</a>
+    @endauth
+</div>
 <div class="container">
     @yield('content')
 </div>

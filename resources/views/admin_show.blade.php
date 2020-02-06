@@ -85,8 +85,8 @@
                 </li>
             </ul>
             <div class="card-body">
-                <a href="{{ route('courriers.index') }}" class="card-link">Return to index</a>
-                <a href="{{ route('courriers.create') }}" class="card-link">Create new courrier</a>
+                <a href="{{ route('courriers_admin.index') }}" class="card-link">Return to index</a>
+                <a href="{{ route('courriers_admin.create') }}" class="card-link">Create new courrier</a>
             </div>
         </div>
     </div>

@@ -11,7 +11,7 @@
         }
     </style>
 
-    <div class="card push-top">
+    <div class="card push-top text-center">
         <div class="card-header">
             Login
         </div>
@@ -25,7 +25,7 @@
                     </ul>
                 </div><br/>
             @endif
-            <form method="post" action="{{ route('loginCheck') }}">
+            <form method="post" action="{{ route('loginCheck') }}" class="text-center">
                 <div class="form-group">
                     @csrf
                     <label for="username">Username
@@ -37,7 +37,7 @@
                         <input type="password" class="form-control" name="password"/>
                     </label>
                 </div>
-                <button type="submit" class="btn btn-block btn-danger">Login</button>
+                <button type="submit" class="btn btn-block btn-primary">Login</button>
             </form>
         </div>
     </div>

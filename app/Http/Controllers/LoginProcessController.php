@@ -45,8 +45,14 @@ class LoginProcessController extends Controller
                 ->withErrors($validator);
         } else {
             If (Auth::attempt($request->all(['username', 'password']))) {
-                // authentication success, enters home page
-                return redirect('courriers')->with('success', 'Login success, welcome again!');
+                $destinations = [
+                    'admin' => 'courriers_admin.index',
+                    'bo' => 'courriers_bo.index',
+                    'dv' => 'courriers_dv.index',
+                    'dr' => 'courriers_dr.index',
+                ];
+
+                return redirect(route($destinations[Auth()->user()->role]));
             } else {
                 // authentication fail, back to login page with errors
                 return redirect('login')

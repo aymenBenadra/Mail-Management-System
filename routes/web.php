@@ -11,12 +11,10 @@
 |
 */
 
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::resource('courriers', 'CourrierController');
+Route::resource('courriers_admin', 'ADMINCourrierController');
+Route::resource('courriers_dv', 'DVCourrierController');
+Route::resource('courriers_bo', 'BOCourrierController');
+Route::resource('courriers_dr', 'DRCourrierController');
 
 
 Route::get('login','LoginProcessController@login')->name('login');
@@ -26,3 +24,7 @@ Route::post('loginCheck', 'LoginProcessController@loginCheck')->name('loginCheck
 
 // Logout route to forget user token and get to login page
 Route::get ('logout', 'LoginProcessController@logout')->name('logout');
+
+// Files upload routes
+Route::get('/upload', 'UploadController@uploadForm');
+Route::post('/upload', 'UploadController@uploadSubmit');

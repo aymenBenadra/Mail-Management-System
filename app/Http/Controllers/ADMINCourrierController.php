@@ -6,7 +6,7 @@ use App\Courrier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class CourrierController extends Controller
+class ADMINCourrierController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,9 @@ class CourrierController extends Controller
      */
     public function index()
     {
-        if(Auth::check()) {
+        if(Auth::check() && Auth()->user()->role == 'admin') {
             $courrier = Courrier::all();
-            return view('index', compact('courrier'));
+            return view('admin_index', compact('courrier'));
         }
         else
             return view('login') -> with('Warning!', 'login first to get to this page.');
@@ -30,7 +30,13 @@ class CourrierController extends Controller
      */
     public function create()
     {
-        return view('create');
+        if(Auth::check() && Auth()->user()->role == 'admin') {
+            $courrier = Courrier::all();
+            return view('create');
+        }
+        else
+            return view('login') -> with('Warning!', 'login first to get to this page.');
+
     }
 
     /**
@@ -55,7 +61,7 @@ class CourrierController extends Controller
         ]);
         Courrier::create($storeData);
 
-        return redirect('/courriers')->with('completed', 'Courrier has been saved!');
+        return redirect('/courriers_admin')->with('completed', 'Courrier has been saved!');
     }
 
     /**
@@ -81,8 +87,12 @@ class CourrierController extends Controller
      */
     public function edit($id)
     {
-        $courrier = Courrier::findOrFail($id);
-        return view('edit', compact('courrier'));
+        if(Auth::check() && Auth()->user()->role == 'admin') {
+            $courrier = Courrier::findOrFail($id);
+            return view('admin_edit', compact('courrier'));
+        }
+        else
+            return view('login') -> with('Warning!', 'login first to get to this page.');
     }
 
     /**
@@ -107,7 +117,7 @@ class CourrierController extends Controller
             'receptionDate' => 'required|date'
         ]);
         Courrier::whereId($id)->update($updateData);
-        return redirect('/courriers')->with('completed', 'Courrier has been updated');
+        return redirect('/courriers_admin')->with('completed', 'Courrier has been updated');
     }
 
     /**
@@ -118,9 +128,14 @@ class CourrierController extends Controller
      */
     public function destroy($id)
     {
-        $courrier = Courrier::findOrFail($id);
-        $courrier->delete();
+        if(Auth::check() && Auth()->user()->role == 'admin') {
+            $courrier = Courrier::findOrFail($id);
+            $courrier->delete();
 
-        return redirect('/courriers')->with('completed', 'Courrier has been deleted');
+            return redirect('/courriers_admin')->with('completed', 'Courrier has been deleted');
+        }
+        else
+            return view('login') -> with('Warning!', 'login first to get to this page.');
+
     }
 }
