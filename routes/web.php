@@ -11,10 +11,18 @@
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
 
 Route::resource('courriers', 'CourrierController');
 
-//Route::post('courriers/store', 'RegisterController@create')->name('register');
+
+Route::get('login','LoginProcessController@login')->name('login');
+
+// a post method to check if the user infos are good to go or not.
+Route::post('loginCheck', 'LoginProcessController@loginCheck')->name('loginCheck');
+
+// Logout route to forget user token and get to login page
+Route::get ('logout', 'LoginProcessController@logout')->name('logout');

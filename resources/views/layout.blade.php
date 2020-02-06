@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 </head>
 <body>
+<a href="/login">Login</a>
+<a href="/logout">Logout</a>
 <div class="container">
     @yield('content')
 </div>
