@@ -94,7 +94,8 @@ class DRCourrierController extends Controller
                 'treater' => 'required|max:255',
                 'urgency' => 'required|numeric',
                 'status' => 'required|numeric',
-                'receptionDate' => 'required|date'
+                'receptionDate' => 'required|date',
+                'traitment' => 'max:500',
             ]);
             Courrier::whereId($id)->update($updateData);
             return redirect('/courriers_dr')->with('completed', 'Courrier has been updated');

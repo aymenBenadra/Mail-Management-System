@@ -77,6 +77,12 @@
                     </label>
                 </div>
                 <div class="form-group">
+                    <label for="traitment">Traitment
+                        <textarea rows="8" cols="50" class="form-control" placeholder="traitment"
+                                  name="traitment"></textarea>
+                    </label>
+                </div>
+                <div class="form-group">
                     <input type="hidden" value="1" name="status"/>
                 </div>
                 <button type="submit" class="btn btn-block btn-danger">Create Courrier</button>

@@ -56,7 +56,6 @@
                         <textarea rows="8" cols="50" class="form-control" placeholder="comments"
                                   name="comments">{{ $courrier->comments }}</textarea>
                     </label>
-
                 </div>
                 <div class="form-group">
                     <label for="object">Object
@@ -78,6 +77,12 @@
                     <label for="receptionDate">Reception date
                         <input type="date" class="form-control" name="receptionDate"
                                value="{{ $courrier->receptionDate }}"/>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="traitment">Traitment
+                        <textarea rows="8" cols="50" class="form-control" placeholder="traitment"
+                                  name="traitment">{{ $courrier->traitment }}</textarea>
                     </label>
                 </div>
                 <div class="form-group">

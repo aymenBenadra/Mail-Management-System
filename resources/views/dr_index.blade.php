@@ -28,6 +28,7 @@
                 <td>urgency</td>
                 <td>status</td>
                 <td>receptionDate</td>
+                <td>traitment</td>
                 <td class="text-center">Action</td>
             </tr>
             </thead>
@@ -45,6 +46,7 @@
                     <td>{{$courriers->urgency}}</td>
                     <td>{{$courriers->status}}</td>
                     <td>{{$courriers->receptionDate}}</td>
+                    <td>{{$courriers->traitment}}</td>
                     <td>
                         <a href="{{ route('courriers_dr.show', $courriers->id)}}" class="btn btn-primary btn-sm">Show</a>
                         <a href="{{ route('courriers_dr.edit', $courriers->id)}}" class="btn btn-primary btn-sm">Edit</a>

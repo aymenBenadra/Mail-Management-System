@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Courrier extends Model
 {
-    protected $fillable = ['sender', 'receiver', 'subject', 'corps', 'comments', 'object', 'treater', 'urgency', 'status', 'receptionDate'];
+    protected $fillable = ['sender', 'receiver', 'subject', 'corps', 'comments', 'object', 'treater', 'urgency', 'status', 'receptionDate', 'traitment'];
 }

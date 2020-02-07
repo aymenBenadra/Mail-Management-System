@@ -83,6 +83,12 @@
                                value="{{ $courrier->receptionDate }}" readonly/>
                     </label>
                 </li>
+                <li class="list-group-item">
+                    <label for="traitment">Traitment
+                        <textarea rows="8" cols="50" class="form-control" name="traitment"
+                                  readonly>{{ $courrier->traitment }}</textarea>
+                    </label>
+                </li>
             </ul>
             <div class="card-body">
                 <a href="{{ route('courriers_dv.index') }}" class="card-link">Return to index</a>

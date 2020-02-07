@@ -32,7 +32,7 @@ class ADMINCourrierController extends Controller
     {
         if(Auth::check() && Auth()->user()->role == 'admin') {
             $courrier = Courrier::all();
-            return view('create');
+            return view('admin_create');
         }
         else
             return view('login') -> with('Warning!', 'login first to get to this page.');
@@ -59,6 +59,7 @@ class ADMINCourrierController extends Controller
                 'urgency' => 'required|numeric',
                 'status' => 'required|numeric',
                 'receptionDate' => 'required|date',
+                'traitment' => 'max:500',
             ]);
             Courrier::create($storeData);
 
@@ -125,7 +126,9 @@ class ADMINCourrierController extends Controller
                 'treater' => 'required|max:255',
                 'urgency' => 'required|numeric',
                 'status' => 'required|numeric',
-                'receptionDate' => 'required|date'
+                'receptionDate' => 'required|date',
+                'traitment' => 'max:500',
+                'attachments' => 'file|mimes:jpeg,bmp,png,jpg,pdf,zip|max:20000',
             ]);
             Courrier::whereId($id)->update($updateData);
             return redirect('/courriers_admin')->with('completed', 'Courrier has been updated');

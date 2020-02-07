@@ -19,12 +19,13 @@ class CreateCourriersTable extends Migration
             $table->string('receiver');
             $table->string('subject');
             $table->text('corps');
-            $table->text('comments');
+            $table->text('comments')->nullable(true);
             $table->string('object');
             $table->string('treater');
             $table->tinyInteger('urgency');
             $table->tinyInteger('status');
             $table->date('receptionDate');
+            $table->text('traitment')->nullable(true);
             $table->timestamps();
         });
     }
