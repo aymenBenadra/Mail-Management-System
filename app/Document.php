@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Document extends Model
 {
-    protected $fillable = ['document_id', 'filename'];
+    protected $fillable = ['courrier_id', 'filename'];
 
     public function courrier()
     {

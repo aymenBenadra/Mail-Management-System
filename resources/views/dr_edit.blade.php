@@ -83,7 +83,7 @@
                 <div class="form-group">
                     <input type="hidden" value="2" name="status"/>
                 </div>
-                <button type="submit" class="btn btn-block btn-danger">Update Courrier</button>
+                <button type="submit" class="btn btn-block btn-primary">Update Courrier</button>
             </form>
         </div>
     </div>

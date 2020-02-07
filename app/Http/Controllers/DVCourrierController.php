@@ -52,7 +52,7 @@ class DVCourrierController extends Controller
             $courrier = Courrier::findOrFail($id);
 
             // show the view and pass the nerd to it
-            return view('show', compact('courrier'));
+            return view('dv_show', compact('courrier'));
         }
         else
             return view('login') -> with('Warning!', 'login first to get to this page.');

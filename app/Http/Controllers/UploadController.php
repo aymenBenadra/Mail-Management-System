@@ -15,11 +15,11 @@ class UploadController extends Controller
 
     public function uploadSubmit(UploadRequest $request)
     {
-        $courrier = Courrier::create($request->all());
+        $courrier = $request->ref;
         foreach ($request->attachments as $attachment) {
-            $filename = $attachment->store('photos');
+            $filename = $attachment->store('attachments');
             Document::create([
-                'courrier_id' => $courrier->id,
+                'courrier_id' => $courrier,
                 'filename' => $filename
             ]);
         }

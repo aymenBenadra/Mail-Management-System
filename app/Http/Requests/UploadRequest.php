@@ -13,7 +13,7 @@ class UploadRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,12 +24,13 @@ class UploadRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'name' => 'required',
+            'ref' => 'required',
+            'attachments.*' => 'file|required|mimes:jpeg,bmp,png,jpg,pdf,zip|max:20000'
         ];
-        $attachments = count($this->input('attachments'));
+        /*$attachments = count($this->input('attachments'));
         foreach(range(0, $attachments) as $index) {
-            $rules['photos.' . $index] = 'file|required|mimes:jpeg,bmp,png,jpg,pdf,zip|max:20000';
-        }
+            $rules['attachments.' . $index] = 'file|required|mimes:jpeg,bmp,png,jpg,pdf,zip|max:20000';
+        }*/
         return $rules;
     }
 }
