@@ -47,21 +47,26 @@ class ADMINCourrierController extends Controller
      */
     public function store(Request $request)
     {
-        $storeData = $request->validate([
-            'sender' => 'required|max:255',
-            'receiver' => 'required|max:255',
-            'subject' => 'required|max:255',
-            'corps' => 'required|max:500',
-            'comments' => 'max:500',
-            'object' => 'required|max:255',
-            'treater' => 'required|max:255',
-            'urgency' => 'required|numeric',
-            'status' => 'required|numeric',
-            'receptionDate' => 'required|date',
-        ]);
-        Courrier::create($storeData);
+        if(Auth::check() && Auth()->user()->role == 'admin') {
+            $storeData = $request->validate([
+                'sender' => 'required|max:255',
+                'receiver' => 'required|max:255',
+                'subject' => 'required|max:255',
+                'corps' => 'required|max:500',
+                'comments' => 'max:500',
+                'object' => 'required|max:255',
+                'treater' => 'required|max:255',
+                'urgency' => 'required|numeric',
+                'status' => 'required|numeric',
+                'receptionDate' => 'required|date',
+            ]);
+            Courrier::create($storeData);
 
-        return redirect('/courriers_admin')->with('completed', 'Courrier has been saved!');
+            return redirect('/courriers_admin')->with('completed', 'Courrier has been saved!');
+        }
+        else
+            return view('login') -> with('Warning!', 'login first to get to this page.');
+
     }
 
     /**
@@ -72,11 +77,16 @@ class ADMINCourrierController extends Controller
      */
     public function show($id)
     {
-        // get the courrier
-        $courrier = Courrier::findOrFail($id);
+        if(Auth::check() && Auth()->user()->role == 'admin') {
+            // get the courrier
+            $courrier = Courrier::findOrFail($id);
 
-        // show the view and pass the nerd to it
-        return view('show', compact('courrier'));
+            // show the view and pass the nerd to it
+            return view('show', compact('courrier'));
+        }
+        else
+            return view('login') -> with('Warning!', 'login first to get to this page.');
+
     }
 
     /**
@@ -104,20 +114,24 @@ class ADMINCourrierController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $updateData = $request->validate([
-            'sender' => 'required|max:255',
-            'receiver' => 'required|max:255',
-            'subject' => 'required|max:255',
-            'corps' => 'required|max:500',
-            'comments' => 'max:500',
-            'object' => 'required|max:255',
-            'treater' => 'required|max:255',
-            'urgency' => 'required|numeric',
-            'status' => 'required|numeric',
-            'receptionDate' => 'required|date'
-        ]);
-        Courrier::whereId($id)->update($updateData);
-        return redirect('/courriers_admin')->with('completed', 'Courrier has been updated');
+        if(Auth::check() && Auth()->user()->role == 'admin') {
+            $updateData = $request->validate([
+                'sender' => 'required|max:255',
+                'receiver' => 'required|max:255',
+                'subject' => 'required|max:255',
+                'corps' => 'required|max:500',
+                'comments' => 'max:500',
+                'object' => 'required|max:255',
+                'treater' => 'required|max:255',
+                'urgency' => 'required|numeric',
+                'status' => 'required|numeric',
+                'receptionDate' => 'required|date'
+            ]);
+            Courrier::whereId($id)->update($updateData);
+            return redirect('/courriers_admin')->with('completed', 'Courrier has been updated');
+        }
+        else
+            return view('login') -> with('Warning!', 'login first to get to this page.');
     }
 
     /**

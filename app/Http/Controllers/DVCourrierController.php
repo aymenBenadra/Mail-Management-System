@@ -27,7 +27,10 @@ class DVCourrierController extends Controller
      * Show the form for creating a new resource.
      *
      */
-    public function create(){}
+    public function create()
+    {
+        return redirect('/courriers_dv')->with('warning', 'You don\'t have permission to get there!');
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -44,11 +47,16 @@ class DVCourrierController extends Controller
      */
     public function show($id)
     {
-        // get the courrier
-        $courrier = Courrier::findOrFail($id);
+        if(Auth::check() && Auth()->user()->role == 'dv') {
+            // get the courrier
+            $courrier = Courrier::findOrFail($id);
 
-        // show the view and pass the nerd to it
-        return view('show', compact('courrier'));
+            // show the view and pass the nerd to it
+            return view('show', compact('courrier'));
+        }
+        else
+            return view('login') -> with('Warning!', 'login first to get to this page.');
+
     }
 
     /**
@@ -99,7 +107,11 @@ class DVCourrierController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function destroy($id){}
+    public function destroy($id)
+    {
+        return redirect('/courriers_dv')->with('warning', 'You don\'t have permission to get there!');
+    }
 }

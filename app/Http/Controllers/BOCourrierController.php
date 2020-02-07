@@ -30,7 +30,11 @@ class BOCourrierController extends Controller
      */
     public function create()
     {
-        return view('create');
+        if(Auth::check() && Auth()->user()->role == 'bo') {
+            return view('bo_create');
+        }
+        else
+            return view('login') -> with('Warning!', 'login first to get to this page.');
     }
 
     /**
@@ -41,21 +45,25 @@ class BOCourrierController extends Controller
      */
     public function store(Request $request)
     {
-        $storeData = $request->validate([
-            'sender' => 'required|max:255',
-            'receiver' => 'required|max:255',
-            'subject' => 'required|max:255',
-            'corps' => 'required|max:500',
-            'comments' => 'max:500',
-            'object' => 'required|max:255',
-            'treater' => 'required|max:255',
-            'urgency' => 'required|numeric',
-            'status' => 'required|numeric',
-            'receptionDate' => 'required|date',
-        ]);
-        Courrier::create($storeData);
+        if(Auth::check() && Auth()->user()->role == 'bo') {
+            $storeData = $request->validate([
+                'sender' => 'required|max:255',
+                'receiver' => 'required|max:255',
+                'subject' => 'required|max:255',
+                'corps' => 'required|max:500',
+                'comments' => 'max:500',
+                'object' => 'required|max:255',
+                'treater' => 'required|max:255',
+                'urgency' => 'required|numeric',
+                'status' => 'required|numeric',
+                'receptionDate' => 'required|date',
+            ]);
+            Courrier::create($storeData);
 
-        return redirect('/courriers_bo')->with('completed', 'Courrier has been saved!');
+            return redirect('/courriers_bo')->with('completed', 'Courrier has been saved!');
+        }
+        else
+            return view('login') -> with('Warning!', 'login first to get to this page.');
     }
 
     /**
@@ -66,11 +74,15 @@ class BOCourrierController extends Controller
      */
     public function show($id)
     {
-        // get the courrier
-        $courrier = Courrier::findOrFail($id);
+        if(Auth::check() && Auth()->user()->role == 'bo') {
+            // get the courrier
+            $courrier = Courrier::findOrFail($id);
 
-        // show the view and pass the nerd to it
-        return view('show', compact('courrier'));
+            // show the view and pass the nerd to it
+            return view('show', compact('courrier'));
+        }
+        else
+            return view('login') -> with('Warning!', 'login first to get to this page.');
     }
 
     /**
@@ -81,8 +93,12 @@ class BOCourrierController extends Controller
      */
     public function edit($id)
     {
-        $courrier = Courrier::findOrFail($id);
-        return view('bo_edit', compact('courrier'));
+        if(Auth::check() && Auth()->user()->role == 'bo') {
+            $courrier = Courrier::findOrFail($id);
+            return view('bo_edit', compact('courrier'));
+        }
+        else
+            return view('login') -> with('Warning!', 'login first to get to this page.');
     }
 
     /**
@@ -94,26 +110,34 @@ class BOCourrierController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $updateData = $request->validate([
-            'sender' => 'required|max:255',
-            'receiver' => 'required|max:255',
-            'subject' => 'required|max:255',
-            'corps' => 'required|max:500',
-            'comments' => 'max:500',
-            'object' => 'required|max:255',
-            'treater' => 'required|max:255',
-            'urgency' => 'required|numeric',
-            'status' => 'required|numeric',
-            'receptionDate' => 'required|date'
-        ]);
-        Courrier::whereId($id)->update($updateData);
-        return redirect('/courriers_bo')->with('completed', 'Courrier has been updated');
+        if(Auth::check() && Auth()->user()->role == 'bo') {
+            $updateData = $request->validate([
+                'sender' => 'required|max:255',
+                'receiver' => 'required|max:255',
+                'subject' => 'required|max:255',
+                'corps' => 'required|max:500',
+                'comments' => 'max:500',
+                'object' => 'required|max:255',
+                'treater' => 'required|max:255',
+                'urgency' => 'required|numeric',
+                'status' => 'required|numeric',
+                'receptionDate' => 'required|date'
+            ]);
+            Courrier::whereId($id)->update($updateData);
+            return redirect('/courriers_bo')->with('completed', 'Courrier has been updated');
+        }
+        else
+            return view('login') -> with('Warning!', 'login first to get to this page.');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function destroy($id){}
+    public function destroy($id)
+    {
+        return redirect('/courriers_bo')->with('warning', 'You don\'t have permission to get there!');
+    }
 }

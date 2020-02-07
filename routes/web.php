@@ -26,5 +26,5 @@ Route::post('loginCheck', 'LoginProcessController@loginCheck')->name('loginCheck
 Route::get ('logout', 'LoginProcessController@logout')->name('logout');
 
 // Files upload routes
-Route::get('/upload', 'UploadController@uploadForm');
-Route::post('/upload', 'UploadController@uploadSubmit');
+Route::get('upload', 'UploadController@uploadForm')->name('uploadForm');
+Route::post('upload', 'UploadController@uploadSubmit')->name('upload');

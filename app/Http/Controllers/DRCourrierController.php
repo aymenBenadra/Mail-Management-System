@@ -27,7 +27,10 @@ class DRCourrierController extends Controller
      * Show the form for creating a new resource.
      *
      */
-    public function create(){}
+    public function create()
+    {
+        return redirect('/courriers_dr')->with('warning', 'You don\'t have permission to get there!');
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -44,11 +47,15 @@ class DRCourrierController extends Controller
      */
     public function show($id)
     {
-        // get the courrier
-        $courrier = Courrier::findOrFail($id);
+        if(Auth::check() && Auth()->user()->role == 'dr') {
+            // get the courrier
+            $courrier = Courrier::findOrFail($id);
 
-        // show the view and pass the nerd to it
-        return view('show', compact('courrier'));
+            // show the view and pass the nerd to it
+            return view('show', compact('courrier'));
+        }
+        else
+            return view('login') -> with('Warning!', 'login first to get to this page.');
     }
 
     /**
@@ -59,8 +66,12 @@ class DRCourrierController extends Controller
      */
     public function edit($id)
     {
-        $courrier = Courrier::findOrFail($id);
-        return view('dr_edit', compact('courrier'));
+        if(Auth::check() && Auth()->user()->role == 'dr') {
+            $courrier = Courrier::findOrFail($id);
+            return view('dr_edit', compact('courrier'));
+        }
+        else
+            return view('login') -> with('Warning!', 'login first to get to this page.');
     }
 
     /**
@@ -72,26 +83,34 @@ class DRCourrierController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $updateData = $request->validate([
-            'sender' => 'required|max:255',
-            'receiver' => 'required|max:255',
-            'subject' => 'required|max:255',
-            'corps' => 'required|max:500',
-            'comments' => 'max:500',
-            'object' => 'required|max:255',
-            'treater' => 'required|max:255',
-            'urgency' => 'required|numeric',
-            'status' => 'required|numeric',
-            'receptionDate' => 'required|date'
-        ]);
-        Courrier::whereId($id)->update($updateData);
-        return redirect('/courriers_dr')->with('completed', 'Courrier has been updated');
+        if(Auth::check() && Auth()->user()->role == 'dr') {
+            $updateData = $request->validate([
+                'sender' => 'required|max:255',
+                'receiver' => 'required|max:255',
+                'subject' => 'required|max:255',
+                'corps' => 'required|max:500',
+                'comments' => 'max:500',
+                'object' => 'required|max:255',
+                'treater' => 'required|max:255',
+                'urgency' => 'required|numeric',
+                'status' => 'required|numeric',
+                'receptionDate' => 'required|date'
+            ]);
+            Courrier::whereId($id)->update($updateData);
+            return redirect('/courriers_dr')->with('completed', 'Courrier has been updated');
+        }
+        else
+            return view('login') -> with('Warning!', 'login first to get to this page.');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function destroy($id){}
+    public function destroy($id)
+    {
+        return redirect('/courriers_dr')->with('warning', 'You don\'t have permission to get there!');
+    }
 }

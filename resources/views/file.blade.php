@@ -34,7 +34,7 @@
                     </div>
                 @endif
 
-                    <form action="/upload" enctype="multipart/form-data" method="post">
+                    <form action="{{route('upload')}}" enctype="multipart/form-data" method="post">
                         {{ csrf_field() }}
                         <label for="name">Courrier name:
                             <input name="name" type="text">
