@@ -23,6 +23,6 @@ class UploadController extends Controller
                 'filename' => $filename
             ]);
         }
-        return 'Upload successful!';
+        return view('file')->with('success','File uploaded successfully!');
     }
 }
