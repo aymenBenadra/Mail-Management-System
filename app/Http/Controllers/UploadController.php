@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Courrier;
 use App\Document;
 use App\Http\Requests\UploadRequest;
+use Illuminate\Support\Facades\Response;
 
 class UploadController extends Controller
 {
@@ -17,10 +17,14 @@ class UploadController extends Controller
     {
         $courrier = $request->ref;
         foreach ($request->attachments as $attachment) {
-            $filename = $attachment->store('attachments');
+            $filepath = $attachment->store('attachments', 'public');
+            $filename = basename($filepath);
+            $ext = pathinfo($filename, PATHINFO_EXTENSION);
             Document::create([
                 'courrier_id' => $courrier,
-                'filename' => $filename
+                'filepath' => $filepath,
+                'filename' => $filename,
+                'type' => $ext
             ]);
         }
         return view('file')->with('success','File uploaded successfully!');

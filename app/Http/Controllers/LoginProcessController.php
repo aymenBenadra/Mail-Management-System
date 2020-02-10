@@ -20,7 +20,18 @@ class LoginProcessController extends Controller
     public function login()
     {
         If (Auth::check()) {
-            return redirect('/courriers');
+            if(Auth()->user()->role == 'admin'){
+                return redirect('/courriers_admin');
+            }
+            if(Auth()->user()->role == 'dr'){
+                return redirect('/courriers_dr');
+            }
+            if(Auth()->user()->role == 'dv'){
+                return redirect('/courriers_dv');
+            }
+            if(Auth()->user()->role == 'bo'){
+                return redirect('/courriers_bo');
+            }
         }
         return view('login');
     }

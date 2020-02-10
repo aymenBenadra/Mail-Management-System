@@ -11,12 +11,13 @@
 |
 */
 
+// Main controllers for all user grades
 Route::resource('courriers_admin', 'ADMINCourrierController');
 Route::resource('courriers_dv', 'DVCourrierController');
 Route::resource('courriers_bo', 'BOCourrierController');
 Route::resource('courriers_dr', 'DRCourrierController');
 
-
+// Login route
 Route::get('login','LoginProcessController@login')->name('login');
 
 // a post method to check if the user infos are good to go or not.
@@ -28,3 +29,6 @@ Route::get ('logout', 'LoginProcessController@logout')->name('logout');
 // Files upload routes
 Route::get('upload', 'UploadController@uploadForm')->name('uploadForm');
 Route::post('upload', 'UploadController@uploadSubmit')->name('upload');
+
+// Files download route
+Route::get('download/{filename}', 'DownloadController@download')->name('download/');

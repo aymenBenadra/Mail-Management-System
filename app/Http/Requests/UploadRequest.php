@@ -25,7 +25,7 @@ class UploadRequest extends FormRequest
     {
         $rules = [
             'ref' => 'required',
-            'attachments.*' => 'file|required|mimes:jpeg,bmp,png,jpg,pdf,zip|max:20000'
+            //'attachments.*' => 'file|required|mimes:jpeg,bmp,png,jpg,pdf,zip|max:20000'
         ];
         /*$attachments = count($this->input('attachments'));
         foreach(range(0, $attachments) as $index) {

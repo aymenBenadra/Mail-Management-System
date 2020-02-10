@@ -24,13 +24,20 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 </head>
 <body>
-<div class="top-right links">
-    @auth
-        <a href="{{ url('logout') }}">Logout</a>
-    @else
-        <a href="{{ route('login') }}">Login</a>
-    @endauth
-</div>
+
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="{{ route('login') }}">Courrier Management System</a>
+
+    <div class="top-right links">
+        @auth
+            <a href="{{ url('logout') }}">Logout</a>
+        @else
+            <a href="{{ route('login') }}">Login</a>
+        @endauth
+    </div>
+</nav>
+
+
 <div class="container">
     @yield('content')
 </div>

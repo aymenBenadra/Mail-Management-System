@@ -89,6 +89,13 @@
                                   readonly>{{ $courrier->traitment }}</textarea>
                     </label>
                 </li>
+                @foreach($courrier->documents as $document)
+                    <li class="list-group-item">
+                        <label for="filename">Attachment:
+                            <a class="btn btn-primary btn-lg form-control" href="{{ route('download/',$document->filename) }}">Download</a>
+                        </label>
+                    </li>
+                @endforeach
             </ul>
             <div class="card-body">
                 <a href="{{ route('courriers_admin.index') }}" class="card-link">Return to index</a>

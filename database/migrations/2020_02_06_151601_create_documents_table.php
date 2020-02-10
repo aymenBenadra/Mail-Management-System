@@ -17,7 +17,9 @@ class CreateDocumentsTable extends Migration
             $table->increments('document_id');
             $table->integer('courrier_id')->unsigned();
             $table->foreign('courrier_id')->references('id')->on('courriers');
+            $table->string('filepath');
             $table->string('filename');
+            $table->string('type');
             $table->timestamps();
         });
     }
