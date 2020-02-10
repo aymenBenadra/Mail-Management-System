@@ -22,6 +22,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Courrier management app snippets</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.0/bootstrap-table.min.css'>
+    <link rel='stylesheet' href='https://rawgit.com/vitalets/x-editable/master/dist/bootstrap3-editable/css/bootstrap-editable.css'>
+    <script src="https://kit.fontawesome.com/14a2f146e1.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
 
@@ -45,5 +49,27 @@
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" type="text/js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.0/bootstrap-table.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/extensions/editable/bootstrap-table-editable.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/extensions/export/bootstrap-table-export.js'></script>
+<script src='https://rawgit.com/hhurz/tableExport.jquery.plugin/master/tableExport.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/extensions/filter-control/bootstrap-table-filter-control.js'></script>
+<script>
+    //exporte les données sélectionnées
+    var $table = $('#table');
+    $(function () {
+        $('#toolbar').find('select').change(function () {
+            $table.bootstrapTable('refreshOptions', {
+                exportDataType: $(this).val()
+        });
+        });
+    });
+
+    var trBoldBlue = $("table");
+
+    $(trBoldBlue).on("click", "tr", function (){
+        $(this).toggleClass("bold-blue");
+    });
+</script>
 </body>
 </html>
