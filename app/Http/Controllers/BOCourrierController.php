@@ -15,12 +15,25 @@ class BOCourrierController extends Controller
      */
     public function index()
     {
-        if(Auth::check() && Auth()->user()->role == 'bo') {
+        if (Auth::check() && Auth()->user()->role == 'bo') {
             $courrier = Courrier::all();
-            return view('bo_index', compact('courrier'));
-        }
-        else
-            return view('login') -> with('Warning!', 'login first to get to this page.');
+            return view('index', compact('courrier'));
+        } else
+            return view('login')->with('Warning!', 'login first to get to this page.');
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function archive()
+    {
+        if (Auth::check() && Auth()->user()->role == 'bo') {
+            $courrier = Courrier::all();
+            return view('archive', compact('courrier'));
+        } else
+            return view('login')->with('Warning!', 'login first to get to this page.');
     }
 
     /**
@@ -30,8 +43,8 @@ class BOCourrierController extends Controller
      */
     public function create()
     {
-        if(Auth::check() && Auth()->user()->role == 'bo') {
-            return view('bo_create');
+        if (Auth::check() && Auth()->user()->role == 'bo') {
+            return view('create');
         }
         else
             return view('login') -> with('Warning!', 'login first to get to this page.');
@@ -79,7 +92,7 @@ class BOCourrierController extends Controller
             $courrier = Courrier::findOrFail($id);
 
             // show the view and pass the nerd to it
-            return view('bo_show', compact('courrier'));
+            return view('show', compact('courrier'));
         }
         else
             return view('login') -> with('Warning!', 'login first to get to this page.');
@@ -95,7 +108,7 @@ class BOCourrierController extends Controller
     {
         if(Auth::check() && Auth()->user()->role == 'bo') {
             $courrier = Courrier::findOrFail($id);
-            return view('bo_edit', compact('courrier'));
+            return view('edit', compact('courrier'));
         }
         else
             return view('login') -> with('Warning!', 'login first to get to this page.');

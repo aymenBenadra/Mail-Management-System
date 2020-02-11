@@ -13,6 +13,16 @@ class CreateCourriersTable extends Migration
      */
     public function up()
     {
+        //TODO: configure the id in the courriers table to be number/year ex: "3241/20"
+        //create trigger insertion on courriers after insert as
+        //begin
+        //	declare @ref varchar(25), sender varchar(250), receiver varchar(250), sujet varchar(250), corps varchar(500), commentaires varchar(250), objet varchar(250), traiterPar varchar(250), urgence int, statut int, dateReception date, traitement varchar(500);
+        //    select @ref = id from inserted;
+        //	set @ref = @ref + '/' + DATE_FORMAT(CURDATE(), '%y');
+        //	insert into courriers select @ref, @sender, @receiver, @sujet, @corps, @commentaires, @objet, @traiterPar, @urgence, @statut, @dateReception, @traitement from inserted;
+        //end
+
+
         Schema::create('courriers', function (Blueprint $table) {
             $table->increments('id');
             $table->string('sender');

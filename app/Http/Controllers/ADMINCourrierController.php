@@ -16,12 +16,25 @@ class ADMINCourrierController extends Controller
      */
     public function index()
     {
-        if(Auth::check() && Auth()->user()->role == 'admin') {
+        if (Auth::check() && Auth()->user()->role == 'admin') {
             $courrier = Courrier::all();
-            return view('admin_index', compact('courrier'));
-        }
-        else
-            return view('login') -> with('Warning!', 'login first to get to this page.');
+            return view('index', compact('courrier'));
+        } else
+            return view('login')->with('Warning!', 'login first to get to this page.');
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function archive()
+    {
+        if (Auth::check() && Auth()->user()->role == 'admin') {
+            $courrier = Courrier::all();
+            return view('archive', compact('courrier'));
+        } else
+            return view('login')->with('Warning!', 'login first to get to this page.');
     }
 
     /**
@@ -31,13 +44,11 @@ class ADMINCourrierController extends Controller
      */
     public function create()
     {
-        if(Auth::check() && Auth()->user()->role == 'admin') {
-            $courrier = Courrier::all();
-            return view('admin_create');
+        if (Auth::check() && Auth()->user()->role == 'admin') {
+            return view('create');
         }
         else
             return view('login') -> with('Warning!', 'login first to get to this page.');
-
     }
 
     /**
@@ -84,7 +95,7 @@ class ADMINCourrierController extends Controller
             $courrier = Courrier::findOrFail($id);
 
             // show the view and pass the nerd to it
-            return view('admin_show', compact('courrier'));
+            return view('show', compact('courrier'));
         }
         else
             return view('login') -> with('Warning!', 'login first to get to this page.');
@@ -101,7 +112,7 @@ class ADMINCourrierController extends Controller
     {
         if(Auth::check() && Auth()->user()->role == 'admin') {
             $courrier = Courrier::findOrFail($id);
-            return view('admin_edit', compact('courrier'));
+            return view('edit', compact('courrier'));
         }
         else
             return view('login') -> with('Warning!', 'login first to get to this page.');

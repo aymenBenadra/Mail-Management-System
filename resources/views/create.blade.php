@@ -27,7 +27,7 @@
                     </ul>
                 </div><br/>
             @endif
-            <form method="post" action="{{ route('courriers_bo.store') }}">
+            <form method="post" action="{{ route('courriers_admin.store') }}">
                 <div class="form-group">
                     @csrf
                     <label for="sender">Sender
@@ -76,15 +76,25 @@
                         <input type="date" class="form-control" name="receptionDate"/>
                     </label>
                 </div>
-                <div class="form-group">
-                    <input type="hidden" value="1" name="status"/>
-                </div>
+                @if(Auth()->user()->role == 'bo')
+                    <div class="form-group">
+                        <input type="hidden" value="1" name="status"/>
+                    </div>
+                @elseif(Auth()->user()->role == 'admin')
+                    <div class="form-group">
+                        <label for="traitment">Traitment
+                            <textarea rows="8" cols="50" class="form-control" placeholder="traitment"
+                                      name="traitment"></textarea>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Status
+                            <input type="number" max="3" min="1" class="form-control" placeholder="1" name="status"/>
+                        </label>
+                    </div>
+                @endif
                 <button type="submit" class="btn btn-block btn-primary">Create Courrier</button>
             </form>
         </div>
     </div>
-
-    <script>
-        document.getElementById('role').innerText = 'BO';
-    </script>
 @endsection

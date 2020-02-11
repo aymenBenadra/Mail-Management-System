@@ -17,7 +17,7 @@ class DRCourrierController extends Controller
     {
         if(Auth::check() && Auth()->user()->role == 'dr') {
             $courrier = Courrier::all();
-            return view('dr_index', compact('courrier'));
+            return view('index', compact('courrier'));
         }
         else
             return view('login') -> with('Warning!', 'login first to get to this page.');
@@ -51,7 +51,7 @@ class DRCourrierController extends Controller
             // get the courrier
             $courrier = Courrier::findOrFail($id);
             // show the view and pass the nerd to it
-            return view('dr_show', compact('courrier'));
+            return view('show', compact('courrier'));
         }
         else
             return view('login') -> with('Warning!', 'login first to get to this page.');
@@ -67,7 +67,7 @@ class DRCourrierController extends Controller
     {
         if(Auth::check() && Auth()->user()->role == 'dr') {
             $courrier = Courrier::findOrFail($id);
-            return view('dr_edit', compact('courrier'));
+            return view('edit', compact('courrier'));
         }
         else
             return view('login') -> with('Warning!', 'login first to get to this page.');

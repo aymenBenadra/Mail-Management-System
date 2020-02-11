@@ -39,7 +39,7 @@
 <body>
 
 <nav class="navbar navbar-light bg-light">
-    <a class="navbar-brand" href="{{ route('login') }}">Courrier Management System - <span id="role"></span></a>
+    <a class="navbar-brand" href="{{ route('login') }}">Courrier Management System</a>
 
     <div class="top-right links">
         @auth
@@ -49,7 +49,6 @@
         @endauth
     </div>
 </nav>
-
 
 <div class="container-fluid">
     <div class="row">
@@ -84,13 +83,13 @@
                 </h6>
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{route('courriers_'.Auth()->user()->role.'.index')}}">
                             <i class="fas fa-sync"></i>
                             Current mail
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{ route('archive_'.Auth()->user()->role) }}">
                             <i class="fas fa-archive"></i>
                             Mail archive
                         </a>
@@ -106,7 +105,8 @@
                 @if(Auth()->user()->role == "admin" or Auth()->user()->role == "bo")
                     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
                         <span>OUT mail</span>
-                        <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
+                        <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report"
+                           title="Add a new courrier">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                  fill="none"
                                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -147,7 +147,6 @@
                 <div id="toolbar" class="btn-toolbar mb-2 mb-md-0">
                     <label>
                         <select class="form-control">
-                            <option value="">Export Basic</option>
                             <option value="all">Export All</option>
                             <option value="selected">Export Selected</option>
                         </select>

@@ -83,20 +83,29 @@
                                value="{{ $courrier->receptionDate }}" readonly/>
                     </label>
                 </li>
-                <li class="list-group-item">
-                    <label for="traitment">Traitment
-                        <textarea rows="8" cols="50" class="form-control" name="traitment"
-                                  readonly>{{ $courrier->traitment }}</textarea>
-                    </label>
-                </li>
+                @if(Auth()->user()->role == 'admin' or Auth()->user()->role == 'dv')
+                    <li class="list-group-item">
+                        <label for="traitment">Traitment
+                            <textarea rows="8" cols="50" class="form-control" name="traitment"
+                                      readonly>{{ $courrier->traitment }}</textarea>
+                        </label>
+                    </li>
+                    @foreach($courrier->documents as $document)
+                        <li class="list-group-item">
+                            <label for="filename">Attachment:
+                                <a class="btn btn-primary btn-lg form-control"
+                                   href="{{ route('download/',$document->filename) }}">Download</a>
+                            </label>
+                        </li>
+                    @endforeach
+                @endif
             </ul>
-            <div class="card-body">
-                <a href="{{ route('courriers_dr.index') }}" class="card-link">Return to index</a>
-            </div>
+                <div class="card-body">
+                    <a href="{{ route('courriers_'.Auth()->user()->role.'.index') }}" class="card-link">Return to
+                        index</a>
+                    <a href="{{ route('courriers_'.Auth()->user()->role.'.create') }}" class="card-link">Create new
+                        courrier</a>
+                </div>
         </div>
     </div>
-
-    <script>
-        document.getElementById('role').innerText = 'DR';
-    </script>
 @endsection

@@ -49,34 +49,41 @@
             <tbody>
             <?php $i = 0; ?>
             @foreach($courrier as $courriers)
-                <tr>
-                    <td class="bs-checkbox">
-                        <label>
-                            <input data-index="{{$i++}}" name="btSelectItem" type="checkbox">
-                        </label>
-                    </td>
-                    <td>{{$courriers->id}}</td>
-                    <td>{{$courriers->sender}}</td>
-                    <td>{{$courriers->receiver}}</td>
-                    <td>{{$courriers->subject}}</td>
-                    <td>{{$courriers->object}}</td>
-                    <td>{{$courriers->treater}}</td>
-                    <td>{{$courriers->urgency}}</td>
-                    <td>{{$courriers->status}}</td>
-                    <td>{{$courriers->receptionDate}}</td>
-                    <td>
-                        <a href="{{ route('courriers_bo.show', $courriers->id)}}"
-                           class="btn btn-primary btn-sm"><i class="far fa-eye"></i></a>
-                        <a href="{{ route('courriers_bo.edit', $courriers->id)}}"
-                           class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
-                    </td>
-                </tr>
+                @if($courriers->status < 3)
+                    <tr>
+                        <td class="bs-checkbox">
+                            <label>
+                                <input data-index="{{$i++}}" name="btSelectItem" type="checkbox">
+                            </label>
+                        </td>
+                        <td>{{$courriers->id}}</td>
+                        <td>{{$courriers->sender}}</td>
+                        <td>{{$courriers->receiver}}</td>
+                        <td>{{$courriers->subject}}</td>
+                        <td>{{$courriers->object}}</td>
+                        <td>{{$courriers->treater}}</td>
+                        <td>{{$courriers->urgency}}</td>
+                        <td>{{$courriers->status}}</td>
+                        <td>{{$courriers->receptionDate}}</td>
+                        <td>
+                            <a href="{{ route('courriers_'.Auth()->user()->role.'.show', $courriers->id)}}"
+                               class="btn btn-primary btn-sm"><i class="far fa-eye"></i></a>
+                            <a href="{{ route('courriers_'.Auth()->user()->role.'.edit', $courriers->id)}}"
+                               class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
+                            @if(Auth()->user()->role == 'admin')
+                                <form action="{{ route('courriers_admin.destroy', $courriers->id)}}" method="post"
+                                      style="display: inline-block" onsubmit="return confirm('Are you sure?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                            @endif
+                        </td>
+                    </tr>
+                @endif
             @endforeach
             </tbody>
         </table>
     </div>
-
-    <script>
-        document.getElementById('role').innerText = 'BO';
-    </script>
 @endsection
