@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('indexLayout')
 
 @section('content')
     <style>
@@ -12,13 +12,6 @@
                 {{ session()->get('success') }}
             </div><br/>
         @endif
-        <div id="toolbar">
-            <select class="form-control">
-                <option value="">Export Basic</option>
-                <option value="all">Export All</option>
-                <option value="selected">Export Selected</option>
-            </select>
-        </div>
         <table id="table"
                data-id-field="ref"
                data-unique-id="ref"
@@ -50,7 +43,7 @@
                 <th data-field="receptionDate" data-filter-control="input" data-sortable="true" scope="col">
                     receptionDate
                 </th>
-                <th data-field="action" scope="col" class="text-center w-100">Action</th>
+                <th data-field="action" scope="col" class="text-center w-auto">Action</th>
             </tr>
             </thead>
             <tbody>

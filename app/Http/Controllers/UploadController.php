@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Document;
 use App\Http\Requests\UploadRequest;
-use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Auth;
 
 class UploadController extends Controller
 {
@@ -27,6 +27,8 @@ class UploadController extends Controller
                 'type' => $ext
             ]);
         }
-        return view('file')->with('success','File uploaded successfully!');
+        session()->flash('message', 'File uploaded successfully!');
+        session()->flash('alert-class', 'alert-success');
+        return view('file');
     }
 }

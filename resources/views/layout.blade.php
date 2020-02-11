@@ -61,10 +61,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Courrier management app snippets</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Courrier management app</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.css">
-    <link rel='stylesheet' href='https://rawgit.com/vitalets/x-editable/master/dist/bootstrap3-editable/css/bootstrap-editable.css'>
+    <link rel='stylesheet'
+          href='https://rawgit.com/vitalets/x-editable/master/dist/bootstrap3-editable/css/bootstrap-editable.css'>
     <script src="https://kit.fontawesome.com/14a2f146e1.js" crossorigin="anonymous"></script>
 
 </head>
@@ -82,25 +84,30 @@
     </div>
 </nav>
 
-<div class="hero-image">
-    <div class="hero-text">
-        <h1 style="font-size:50px">I am John Doe</h1>
-        <p>And I'm a Photographer</p>
-        <button>Hire me</button>
-    </div>
-</div>
-
 <div class="container">
     @yield('content')
 </div>
 
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.15.5/bootstrap-table.min.js" integrity="sha256-i6G9CgAfmcq/7vYTD52U9501fb2XJiFGPMRGKn0QV7E=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.15.5/extensions/editable/bootstrap-table-editable.min.js" integrity="sha256-XSltPifpfm4q/z4sC3CCRtPovsASyWK+yATwQdF6jMA=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.15.5/extensions/export/bootstrap-table-export.min.js" integrity="sha256-OnaKf+O9hVdfJBTLuam3Sc2dm8izuRctXANRiWH/uaw=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.15.5/extensions/filter-control/bootstrap-table-filter-control.min.js" integrity="sha256-C29viSMl3fnEMgjPNmsODHk7/xO4EvzVAcJ4JC4dewM=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.15.5/bootstrap-table.min.js"
+        integrity="sha256-i6G9CgAfmcq/7vYTD52U9501fb2XJiFGPMRGKn0QV7E=" crossorigin="anonymous"></script>
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.15.5/extensions/editable/bootstrap-table-editable.min.js"
+    integrity="sha256-XSltPifpfm4q/z4sC3CCRtPovsASyWK+yATwQdF6jMA=" crossorigin="anonymous"></script>
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.15.5/extensions/export/bootstrap-table-export.min.js"
+    integrity="sha256-OnaKf+O9hVdfJBTLuam3Sc2dm8izuRctXANRiWH/uaw=" crossorigin="anonymous"></script>
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.15.5/extensions/filter-control/bootstrap-table-filter-control.min.js"
+    integrity="sha256-C29viSMl3fnEMgjPNmsODHk7/xO4EvzVAcJ4JC4dewM=" crossorigin="anonymous"></script>
 <script src='https://rawgit.com/hhurz/tableExport.jquery.plugin/master/tableExport.js'></script>
 <script>
     //exporte les données sélectionnées
@@ -109,13 +116,13 @@
         $('#toolbar').find('select').change(function () {
             $table.bootstrapTable('refreshOptions', {
                 exportDataType: $(this).val()
-        });
+            });
         });
     });
 
     var trBoldBlue = $("table");
 
-    $(trBoldBlue).on("click", "tr", function (){
+    $(trBoldBlue).on("click", "tr", function () {
         $(this).toggleClass("bold-blue");
     });
 </script>
