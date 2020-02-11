@@ -50,7 +50,6 @@ class DRCourrierController extends Controller
         if(Auth::check() && Auth()->user()->role == 'dr') {
             // get the courrier
             $courrier = Courrier::findOrFail($id);
-
             // show the view and pass the nerd to it
             return view('dr_show', compact('courrier'));
         }
@@ -95,7 +94,6 @@ class DRCourrierController extends Controller
                 'urgency' => 'required|numeric',
                 'status' => 'required|numeric',
                 'receptionDate' => 'required|date',
-                'traitment' => 'max:500',
             ]);
             Courrier::whereId($id)->update($updateData);
             return redirect('/courriers_dr')->with('completed', 'Courrier has been updated');

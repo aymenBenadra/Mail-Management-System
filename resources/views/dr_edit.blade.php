@@ -87,4 +87,8 @@
             </form>
         </div>
     </div>
+
+    <script>
+        document.getElementById('role').innerText = 'DR';
+    </script>
 @endsection

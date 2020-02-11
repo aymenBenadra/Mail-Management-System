@@ -1,39 +1,45 @@
 @extends('layout')
 
 @section('content')
-
-
     <style>
         .push-top {
             margin-top: 50px;
         }
     </style>
 
-    <h1>Admin</h1>
     <div class="push-top">
         @if(session()->get('success'))
             <div class="alert alert-success">
                 {{ session()->get('success') }}
             </div><br/>
         @endif
-        <!--<div id="toolbar">
-            <label>Export type
-                <select class="form-control">
-                    <option value="">Basic</option>
-                    <option value="all">All</option>
-                </select>
-            </label>
-        </div>-->
+        <div id="toolbar">
+            <select class="form-control">
+                <option value="">Export Basic</option>
+                <option value="all">Export All</option>
+                <option value="selected">Export Selected</option>
+            </select>
+        </div>
         <table id="table"
+               data-id-field="ref"
+               data-unique-id="ref"
+               data-escape="false"
+               data-show-fullscreen="true"
+               buttonsToolbar="true"
+               data-show-pagination-switch="true"
+               data-pagination="true"
+               data-pagination-loop="true"
+               show-button-icons="true"
                data-toggle="table"
                data-search="true"
                data-filter-control="true"
-               data-show-export="false"
+               data-show-export="true"
                data-click-to-select="false"
                data-toolbar="#toolbar"
                class="table-responsive">
             <thead class="thead-dark">
             <tr>
+                <th data-field="state" data-checkbox="true">State</th>
                 <th data-field="ref" data-filter-control="input" data-sortable="true" scope="col">REF</th>
                 <th data-field="sender" data-filter-control="input" scope="col">sender</th>
                 <th data-field="receiver" data-filter-control="input" scope="col">receiver</th>
@@ -45,13 +51,18 @@
                 <th data-field="receptionDate" data-filter-control="input" data-sortable="true" scope="col">
                     receptionDate
                 </th>
-                <th data-field="traitment" data-filter-control="input" scope="col">traitment</th>
-                <th data-field="action" scope="col" class="text-center w-100">Action</th>
+                <th data-field="action" scope="col" class="text-center w-auto">Action</th>
             </tr>
             </thead>
             <tbody>
+            <?php $i = 0; ?>
             @foreach($courrier as $courriers)
                 <tr>
+                    <td class="bs-checkbox">
+                        <label>
+                            <input data-index="{{$i++}}" name="btSelectItem" type="checkbox">
+                        </label>
+                    </td>
                     <td>{{$courriers->id}}</td>
                     <td>{{$courriers->sender}}</td>
                     <td>{{$courriers->receiver}}</td>
@@ -61,17 +72,16 @@
                     <td>{{$courriers->urgency}}</td>
                     <td>{{$courriers->status}}</td>
                     <td>{{$courriers->receptionDate}}</td>
-                    <td>{{$courriers->traitment}}</td>
-                    <td class="text-center">
+                    <td>
                         <a href="{{ route('courriers_admin.show', $courriers->id)}}"
-                           class="btn btn-primary btn-sm">Show</a>
+                           class="btn btn-primary btn-sm"><i class="far fa-eye"></i></a>
                         <a href="{{ route('courriers_admin.edit', $courriers->id)}}"
-                           class="btn btn-primary btn-sm">Edit</a>
+                           class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
                         <form action="{{ route('courriers_admin.destroy', $courriers->id)}}" method="post"
                               style="display: inline-block" onsubmit="return confirm('Are you sure?');">
                             @csrf
                             @method('DELETE')
-                            <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+                            <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                         </form>
                     </td>
                 </tr>
@@ -79,4 +89,8 @@
             </tbody>
         </table>
     </div>
+
+    <script>
+        document.getElementById('role').innerText = 'Admin';
+    </script>
 @endsection

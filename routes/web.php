@@ -19,6 +19,7 @@ Route::resource('courriers_dr', 'DRCourrierController');
 
 // Login route
 Route::get('login','LoginProcessController@login')->name('login');
+Route::get('/','LoginProcessController@login')->name('Home');
 
 // a post method to check if the user infos are good to go or not.
 Route::post('loginCheck', 'LoginProcessController@loginCheck')->name('loginCheck');

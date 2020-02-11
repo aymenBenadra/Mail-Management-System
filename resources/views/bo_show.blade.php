@@ -96,4 +96,8 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.getElementById('role').innerText = 'BO';
+    </script>
 @endsection

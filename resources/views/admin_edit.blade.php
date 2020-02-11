@@ -92,4 +92,8 @@
             </form>
         </div>
     </div>
+
+    <script>
+        document.getElementById('role').innerText = 'Admin';
+    </script>
 @endsection
