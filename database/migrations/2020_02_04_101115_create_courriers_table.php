@@ -14,6 +14,9 @@ class CreateCourriersTable extends Migration
     public function up()
     {
         //TODO: configure the id in the courriers table to be number/year ex: "3241/20"
+        //TODO: design the input group in the edit and create views
+        //TODO: redesign the database and entities in the views
+        //TODO: add output mails
         //create trigger insertion on courriers after insert as
         //begin
         //	declare @ref varchar(25), sender varchar(250), receiver varchar(250), sujet varchar(250), corps varchar(500), commentaires varchar(250), objet varchar(250), traiterPar varchar(250), urgence int, statut int, dateReception date, traitement varchar(500);
