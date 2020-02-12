@@ -49,7 +49,7 @@
             <tbody>
             <?php $i = 0; ?>
             @foreach($courrier as $courriers)
-                @if($courriers->status = 3)
+                @if($courriers->status == 3)
                     <tr>
                         <td class="bs-checkbox">
                             <label>

@@ -43,7 +43,7 @@
 
     <div class="top-right links">
         @auth
-            <a href="{{ url('logout') }}">Logout</a>
+            <a href="{{ url('logout') }}">Logout - {{ Auth()->user()->name }}</a>
         @else
             <a href="{{ route('login') }}">Login</a>
         @endauth
@@ -75,22 +75,5 @@
     src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.15.5/extensions/filter-control/bootstrap-table-filter-control.min.js"
     integrity="sha256-C29viSMl3fnEMgjPNmsODHk7/xO4EvzVAcJ4JC4dewM=" crossorigin="anonymous"></script>
 <script src='https://rawgit.com/hhurz/tableExport.jquery.plugin/master/tableExport.js'></script>
-<script>
-    //exporte les données sélectionnées
-    var $table = $('#table');
-    $(function () {
-        $('#toolbar').find('select').change(function () {
-            $table.bootstrapTable('refreshOptions', {
-                exportDataType: $(this).val()
-            });
-        });
-    });
-
-    var trBoldBlue = $("table");
-
-    $(trBoldBlue).on("click", "tr", function () {
-        $(this).toggleClass("bold-blue");
-    });
-</script>
 </body>
 </html>

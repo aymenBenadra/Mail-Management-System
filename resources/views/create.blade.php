@@ -27,7 +27,7 @@
                     </ul>
                 </div><br/>
             @endif
-            <form method="post" action="{{ route('courriers_admin.store') }}">
+            <form method="post" action="{{ route('courriers_'.Auth()->user()->role.'.store') }}">
                 <div class="form-group">
                     @csrf
                     <label for="sender">Sender

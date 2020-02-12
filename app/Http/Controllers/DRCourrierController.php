@@ -15,12 +15,25 @@ class DRCourrierController extends Controller
      */
     public function index()
     {
-        if(Auth::check() && Auth()->user()->role == 'dr') {
+        if (Auth::check() && Auth()->user()->role == 'dr') {
             $courrier = Courrier::all();
             return view('index', compact('courrier'));
-        }
-        else
-            return view('login') -> with('Warning!', 'login first to get to this page.');
+        } else
+            return view('login')->with('Warning!', 'login first to get to this page.');
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function archive()
+    {
+        if (Auth::check() && Auth()->user()->role == 'dr') {
+            $courrier = Courrier::all();
+            return view('archive', compact('courrier'));
+        } else
+            return view('login')->with('Warning!', 'login first to get to this page.');
     }
 
     /**
@@ -65,19 +78,33 @@ class DRCourrierController extends Controller
      */
     public function edit($id)
     {
-        if(Auth::check() && Auth()->user()->role == 'dr') {
+        if (Auth::check() && Auth()->user()->role == 'dr') {
             $courrier = Courrier::findOrFail($id);
             return view('edit', compact('courrier'));
-        }
-        else
-            return view('login') -> with('Warning!', 'login first to get to this page.');
+        } else
+            return view('login')->with('Warning!', 'login first to get to this page.');
+    }
+
+    /**
+     * Cloture the specified resource.
+     *
+     * @param int $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function cloture($id)
+    {
+        if (Auth::check() && Auth()->user()->role == 'admin') {
+            $courrier = Courrier::findOrFail($id);
+            return view('update', compact('courrier'));
+        } else
+            return view('login')->with('Warning!', 'login first to get to this page.');
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(Request $request, $id)

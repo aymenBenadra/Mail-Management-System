@@ -43,22 +43,18 @@ class BOCourrierController extends Controller
      */
     public function create()
     {
-        if (Auth::check() && Auth()->user()->role == 'bo') {
-            return view('create');
-        }
-        else
-            return view('login') -> with('Warning!', 'login first to get to this page.');
+        return view('create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(Request $request)
     {
-        if(Auth::check() && Auth()->user()->role == 'bo') {
+        if (Auth::check() && Auth()->user()->role == 'bo') {
             $storeData = $request->validate([
                 'sender' => 'required|max:255',
                 'receiver' => 'required|max:255',
@@ -74,56 +70,53 @@ class BOCourrierController extends Controller
             Courrier::create($storeData);
 
             return redirect('/courriers_bo')->with('completed', 'Courrier has been saved!');
-        }
-        else
-            return view('login') -> with('Warning!', 'login first to get to this page.');
+        } else
+            return view('login')->with('Warning!', 'login first to get to this page.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show($id)
     {
-        if(Auth::check() && Auth()->user()->role == 'bo') {
+        if (Auth::check() && Auth()->user()->role == 'bo') {
             // get the courrier
             $courrier = Courrier::findOrFail($id);
 
             // show the view and pass the nerd to it
             return view('show', compact('courrier'));
-        }
-        else
-            return view('login') -> with('Warning!', 'login first to get to this page.');
+        } else
+            return view('login')->with('Warning!', 'login first to get to this page.');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($id)
     {
-        if(Auth::check() && Auth()->user()->role == 'bo') {
+        if (Auth::check() && Auth()->user()->role == 'bo') {
             $courrier = Courrier::findOrFail($id);
             return view('edit', compact('courrier'));
-        }
-        else
-            return view('login') -> with('Warning!', 'login first to get to this page.');
+        } else
+            return view('login')->with('Warning!', 'login first to get to this page.');
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(Request $request, $id)
     {
-        if(Auth::check() && Auth()->user()->role == 'bo') {
+        if (Auth::check() && Auth()->user()->role == 'bo') {
             $updateData = $request->validate([
                 'sender' => 'required|max:255',
                 'receiver' => 'required|max:255',
@@ -138,9 +131,8 @@ class BOCourrierController extends Controller
             ]);
             Courrier::whereId($id)->update($updateData);
             return redirect('/courriers_bo')->with('completed', 'Courrier has been updated');
-        }
-        else
-            return view('login') -> with('Warning!', 'login first to get to this page.');
+        } else
+            return view('login')->with('Warning!', 'login first to get to this page.');
     }
 
     /**

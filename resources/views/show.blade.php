@@ -83,7 +83,7 @@
                                value="{{ $courrier->receptionDate }}" readonly/>
                     </label>
                 </li>
-                @if(Auth()->user()->role == 'admin' or Auth()->user()->role == 'dv')
+                @if(Auth()->user()->role == 'admin' or Auth()->user()->role == 'dv' or Auth()->user()->role == 'dr')
                     <li class="list-group-item">
                         <label for="traitment">Traitment
                             <textarea rows="8" cols="50" class="form-control" name="traitment"

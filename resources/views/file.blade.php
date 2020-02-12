@@ -1,4 +1,4 @@
-@extends('layout');
+@extends('layout')
 
 @section('content')
     <style>
@@ -13,7 +13,7 @@
 
     <div class="card push-top text-center">
         <div class="card-header">
-            Login
+            File Upload
         </div>
         <div class="card-body">
             @if ($errors->any())
@@ -44,8 +44,4 @@
     @if(session()->has('message'))
         <p class="alert {{ session()->get('alert-class', 'alert-info') }}">{{ session()->get('message') }}</p>
     @endif
-
-    <script>
-        document.getElementById('role').innerText = 'File upload';
-    </script>
 @endsection()
