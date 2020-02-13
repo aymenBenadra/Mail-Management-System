@@ -14,6 +14,18 @@
 // Main controllers for all user grades
 use Illuminate\Support\Facades\Route;
 
+// Archive routes
+Route::get('courriers_admin/archive', 'ArchiveController@archive')->name('courriers_admin.archive');
+Route::get('courriers_dv/archive', 'ArchiveController@archive')->name('courriers_dv.archive');
+Route::get('courriers_dr/archive', 'ArchiveController@archive')->name('courriers_dr.archive');
+Route::get('courriers_bo/archive', 'ArchiveController@archive')->name('courriers_bo.archive');
+
+// Main routes to create, index, show, update, destroy...
+Route::resource('courriers_admin', 'ADMINCourrierController');
+Route::resource('courriers_dv', 'DVCourrierController');
+Route::resource('courriers_bo', 'BOCourrierController');
+Route::resource('courriers_dr', 'DRCourrierController');
+
 // Login route
 Route::get('login', 'LoginProcessController@login')->name('login');
 
@@ -26,21 +38,9 @@ Route::get('logout', 'LoginProcessController@logout')->name('logout');
 // Home Route
 Route::get('/', 'LoginProcessController@login')->name('Home');
 
-// Archive routes
-Route::get('courriers_admin/archive', 'ADMINCourrierController@archive')->name('courriers_admin.archive');
-Route::get('courriers_dv/archive', 'DVCourrierController@archive')->name('courriers_dv.archive');
-Route::get('courriers_dr/archive', 'DRCourrierController@archive')->name('courriers_dr.archive');
-Route::get('courriers_bo/archive', 'BOCourrierController@archive')->name('courriers_bo.archive');
-
 // Cloture routes
 Route::get('courriers_admin/{id}', 'ADMINCourrierController@cloture')->name('courriers_admin.cloture');
 Route::get('courriers_dr/{id}', 'DRCourrierController@cloture')->name('courriers_dr.cloture');
-
-// Main routes to create, index, show, update, destroy...
-Route::resource('courriers_admin', 'ADMINCourrierController');
-Route::resource('courriers_dv', 'DVCourrierController');
-Route::resource('courriers_bo', 'BOCourrierController');
-Route::resource('courriers_dr', 'DRCourrierController');
 
 // Files upload routes
 Route::get('upload', 'UploadController@uploadForm')->name('uploadForm');

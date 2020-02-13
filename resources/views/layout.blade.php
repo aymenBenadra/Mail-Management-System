@@ -23,6 +23,18 @@
             text-decoration: none;
             text-transform: uppercase;
         }
+
+        .container {
+            max-width: 1200px;
+        }
+
+        .push-top {
+            margin-top: 50px;
+        }
+
+        .push-bottom {
+            margin-bottom: 50px;
+        }
     </style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,6 +42,9 @@
     <title>Courrier management app</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.12/css/bootstrap-select.min.css"
+          integrity="sha256-l3FykDBm9+58ZcJJtzcFvWjBZNJO40HmvebhpHXEhC0=" crossorigin="anonymous"/>
     <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.css">
     <link rel='stylesheet'
           href='https://rawgit.com/vitalets/x-editable/master/dist/bootstrap3-editable/css/bootstrap-editable.css'>
@@ -74,6 +89,8 @@
 <script
     src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.15.5/extensions/filter-control/bootstrap-table-filter-control.min.js"
     integrity="sha256-C29viSMl3fnEMgjPNmsODHk7/xO4EvzVAcJ4JC4dewM=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.12/js/bootstrap-select.min.js"
+        integrity="sha256-+o/X+QCcfTkES5MroTdNL5zrLNGb3i4dYdWPWuq6whY=" crossorigin="anonymous"></script>
 <script src='https://rawgit.com/hhurz/tableExport.jquery.plugin/master/tableExport.js'></script>
 </body>
 </html>

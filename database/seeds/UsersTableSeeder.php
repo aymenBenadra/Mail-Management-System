@@ -21,19 +21,63 @@ class UsersTableSeeder extends Seeder
             'name'     => 'Lucy',
             'username' => 'lucy',
             'password' => Hash::make('aymben123'),
-            'role'     => 'bo',
+            'role' => 'bo',
         ));
         User::create(array(
-            'name'     => 'Lily',
+            'name' => 'Lily',
             'username' => 'lily',
             'password' => Hash::make('aymben123'),
-            'role'     => 'dr',
+            'role' => 'dr',
+        ));
+
+        // Divisions separated by its name
+        User::create(array(
+            'name' => 'DEU',
+            'username' => 'deu',
+            'password' => Hash::make('aymben123'),
+            'role' => 'dv',
         ));
         User::create(array(
-            'name'     => 'Mary',
-            'username' => 'mary',
+            'name' => 'DGU',
+            'username' => 'dgu',
             'password' => Hash::make('aymben123'),
-            'role'     => 'dv',
+            'role' => 'dv',
+        ));
+        User::create(array(
+            'name' => 'DAJF',
+            'username' => 'dajf',
+            'password' => Hash::make('aymben123'),
+            'role' => 'dv',
+        ));
+        User::create(array(
+            'name' => 'DAF',
+            'username' => 'daf',
+            'password' => Hash::make('aymben123'),
+            'role' => 'dv',
+        ));
+        User::create(array(
+            'name' => 'Mr Chafki',
+            'username' => 'chafki',
+            'password' => Hash::make('aymben123'),
+            'role' => 'dv',
+        ));
+        User::create(array(
+            'name' => 'Mr Abdouh',
+            'username' => 'abdouh',
+            'password' => Hash::make('aymben123'),
+            'role' => 'dv',
+        ));
+        User::create(array(
+            'name' => 'SI',
+            'username' => 'si',
+            'password' => Hash::make('aymben123'),
+            'role' => 'dv',
+        ));
+        User::create(array(
+            'name' => 'SD',
+            'username' => 'sd',
+            'password' => Hash::make('aymben123'),
+            'role' => 'dv',
         ));
     }
 }

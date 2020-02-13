@@ -1,5 +1,15 @@
 @extends('indexLayout')
-
+<?php
+function custom_echo($x, $length)
+{
+    if (strlen($x) <= $length) {
+        echo $x;
+    } else {
+        $y = substr($x, 0, $length) . '...';
+        echo $y;
+    }
+}
+?>
 @section('content')
     <style>
         .push-top {
@@ -56,15 +66,15 @@
                                 <input data-index="{{$i++}}" name="btSelectItem" type="checkbox">
                             </label>
                         </td>
-                        <td>{{$courriers->id}}</td>
-                        <td>{{$courriers->sender}}</td>
-                        <td>{{$courriers->receiver}}</td>
-                        <td>{{$courriers->subject}}</td>
-                        <td>{{$courriers->object}}</td>
-                        <td>{{$courriers->treater}}</td>
-                        <td>{{$courriers->urgency}}</td>
-                        <td>{{$courriers->status}}</td>
-                        <td>{{$courriers->receptionDate}}</td>
+                        <td>{{ $courriers->id }}</td>
+                        <td>{{ custom_echo( $courriers->sender, 12) }}</td>
+                        <td>{{ custom_echo( $courriers->receiver, 12) }}</td>
+                        <td>{{ custom_echo( $courriers->subject, 12) }}</td>
+                        <td>{{ custom_echo( $courriers->object, 12) }}</td>
+                        <td>{{ custom_echo( $courriers->treater, 12) }}</td>
+                        <td>{{ custom_echo( $courriers->urgency, 12) }}</td>
+                        <td>{{ custom_echo( $courriers->status, 12) }}</td>
+                        <td>{{ custom_echo( $courriers->receptionDate, 12) }}</td>
                         <td>
                             <a href="{{ route('courriers_'.Auth()->user()->role.'.show', $courriers->id)}}"
                                class="btn btn-primary btn-sm"><i class="far fa-eye"></i></a>

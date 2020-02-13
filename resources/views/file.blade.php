@@ -1,19 +1,18 @@
 @extends('layout')
 
 @section('content')
-    <style>
-        .container {
-            max-width: 450px;
-        }
-
-        .push-top {
-            margin-top: 50px;
-        }
-    </style>
 
     <div class="card push-top text-center">
-        <div class="card-header">
-            File Upload
+        <div class="card-header text-center">
+            <div class="row text-center">
+                <a href="{{ route('courriers_'.Auth()->user()->role.'.index') }}" class="card-link col-md-4">Return to
+                    index</a>
+                <p class="col-md-4">File upload</p>
+                @if(Auth()->user()->role == 'admin' or Auth()->user()->role == 'bo')
+                    <a href="{{ route('courriers_'.Auth()->user()->role.'.create') }}" class="card-link col-md-4">Create
+                        new courrier</a>
+                @endif
+            </div>
         </div>
         <div class="card-body">
             @if ($errors->any())

@@ -24,20 +24,6 @@ class ADMINCourrierController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function archive()
-    {
-        if (Auth::check() && Auth()->user()->role == 'admin') {
-            $courrier = Courrier::all();
-            return view('archive', compact('courrier'));
-        } else
-            return view('login')->with('Warning!', 'login first to get to this page.');
-    }
-
-    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -66,12 +52,21 @@ class ADMINCourrierController extends Controller
                 'corps' => 'required|max:500',
                 'comments' => 'max:500',
                 'object' => 'required|max:255',
-                'treater' => 'required|max:255',
+                'treater' => 'max:255',
                 'urgency' => 'required|numeric',
                 'status' => 'required|numeric',
                 'receptionDate' => 'required|date',
                 'traitment' => 'max:500',
             ]);
+            $traits = $request->input('treater');
+            $string = '';
+            foreach ($traits as $trait) {
+                $string .= $trait;
+                $string .= ',';
+            }
+
+            $storeData['treater'] = $string;
+
             Courrier::create($storeData);
 
             return redirect('/courriers_admin')->with('completed', 'Courrier has been saved!');

@@ -1,17 +1,8 @@
-@extends('layout');
+@extends('layout')
 
 @section('content')
-    <style>
-        .container {
-            max-width: 450px;
-        }
 
-        .push-top {
-            margin-top: 50px;
-        }
-    </style>
-
-    <div class="card push-top text-center">
+    <div class="card push-top push-bottom text-center">
         <div class="card-header">
             Login
         </div>
@@ -25,24 +16,20 @@
                     </ul>
                 </div><br/>
             @endif
-            <form method="post" action="{{ route('loginCheck') }}" class="text-center">
+            <form method="post" action="{{ route('loginCheck') }}">
                 <div class="form-group">
                     @csrf
-                    <label for="username">Username
-                        <input type="text" class="form-control" name="username"/>
-                    </label>
+                    <label for="username" style="min-width: 300px">Username
+                        <input type="text" class="form-control" style="max-width: 500px; text-align: center"
+                               name="username" id="username"/></label>
                 </div>
-                <div class="form-group">
-                    <label for="password">Password
-                        <input type="password" class="form-control" name="password"/>
-                    </label>
+                <div class="form-group" style="margin-right: auto; margin-left: auto">
+                    <label for="password" style="min-width: 300px">Password
+                        <input type="password" class="form-control" style="max-width: 500px; text-align: center"
+                               name="password" id="password"/></label>
                 </div>
                 <button type="submit" class="btn btn-block btn-primary">Login</button>
             </form>
         </div>
     </div>
-
-    <script>
-        document.getElementById('role').innerText = 'Login';
-    </script>
 @endsection()
