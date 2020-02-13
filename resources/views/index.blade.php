@@ -92,7 +92,6 @@ function custom_echo($x, $length)
                                 @endif
 
                                 @if(Auth()->user()->role == 'dr' or Auth()->user()->role == 'admin')
-
                                     <form method="post"
                                           action="{{ route('courriers_'.Auth()->user()->role.'.cloture', $courriers->id) }}"
                                           style="display: inline-block" onsubmit="return confirm('Are you sure?');">
@@ -232,7 +231,7 @@ function custom_echo($x, $length)
                         </tr>
                     @endif
                 @else
-                    @if( strpos($courriers->traiterPar, Auth()->user()->name) !== false)
+                    @if( strpos($courriers->traiterPar, Auth()->user()->name) !== false and $courriers->statut < 3)
                         <tr>
                             <td class="bs-checkbox">
                                 <label>
@@ -257,8 +256,6 @@ function custom_echo($x, $length)
                         </tr>
                     @endif
                 @endif
-
-
             @endforeach
             </tbody>
         </table>
