@@ -13,8 +13,6 @@ class CreateCourriersTable extends Migration
      */
     public function up()
     {
-        //TODO: configure the id in the courriers table to be number/year ex: "3241/20"
-        //TODO: redesign the database and entities in the views
         //TODO: add output mails
 
         /*
