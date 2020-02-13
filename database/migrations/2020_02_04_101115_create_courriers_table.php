@@ -16,28 +16,37 @@ class CreateCourriersTable extends Migration
         //TODO: configure the id in the courriers table to be number/year ex: "3241/20"
         //TODO: redesign the database and entities in the views
         //TODO: add output mails
-        //create trigger insertion on courriers after insert as
-        //begin
-        //	declare @ref varchar(25), sender varchar(250), receiver varchar(250), sujet varchar(250), corps varchar(500), commentaires varchar(250), objet varchar(250), traiterPar varchar(250), urgence int, statut int, dateReception date, traitement varchar(500);
-        //    select @ref = id from inserted;
-        //	set @ref = @ref + '/' + DATE_FORMAT(CURDATE(), '%y');
-        //	insert into courriers select @ref, @sender, @receiver, @sujet, @corps, @commentaires, @objet, @traiterPar, @urgence, @statut, @dateReception, @traitement from inserted;
-        //end
+
+        /*
+         Ref_update trigger for each year update.
+
+         IF((select COUNT(*) from courriers) < 1 or DATE_FORMAT(NEW.dateReception, '%y') not in( (select DATE_FORMAT(dateReception, '%y') from courriers) )) then
+         SET NEW.id = (DATE_FORMAT(NEW.dateReception, '%y'))+1000;
+         ELSE
+         SET NEW.id = (select MAX(id) + 1000 from courriers where MOD(id,100) = DATE_FORMAT(NEW.dateReception, '%y') ORDER by id DESC LIMIT 1);
+         end if
+         CREATE TRIGGER `ref_update` BEFORE INSERT ON `courriers`
+         FOR EACH ROW IF((select COUNT(*) from courriers) < 1 or DATE_FORMAT(NEW.dateReception, '%y') not in( (select DATE_FORMAT(dateReception, '%y') from courriers) )) then
+         SET NEW.id = (DATE_FORMAT(NEW.dateReception, '%y'))+1000;
+         ELSE
+         SET NEW.id = (select MAX(id) + 1000 from courriers where MOD(id,100) = DATE_FORMAT(NEW.dateReception, '%y') ORDER by id DESC LIMIT 1);
+         end if
+        */
 
 
         Schema::create('courriers', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('sender');
-            $table->string('receiver');
-            $table->string('subject');
+            $table->string('expediteur');
+            $table->string('recepteur');
+            $table->string('sujet');
             $table->text('corps');
-            $table->text('comments')->nullable(true);
-            $table->string('object');
-            $table->string('treater');
-            $table->tinyInteger('urgency');
-            $table->tinyInteger('status');
-            $table->date('receptionDate');
-            $table->text('traitment')->nullable(true);
+            $table->text('commentaires')->nullable(true);
+            $table->string('objet');
+            $table->string('traiterPar');
+            $table->tinyInteger('urgence');
+            $table->tinyInteger('statut');
+            $table->date('dateReception');
+            $table->text('traitement')->nullable(true);
             $table->timestamps();
         });
     }

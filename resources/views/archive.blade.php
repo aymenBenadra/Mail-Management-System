@@ -59,7 +59,7 @@ function custom_echo($x, $length)
             <tbody>
             <?php $i = 0; ?>
             @foreach($courrier as $courriers)
-                @if($courriers->status == 3)
+                @if($courriers->statut == 3)
                     <tr>
                         <td class="bs-checkbox">
                             <label>
@@ -67,14 +67,14 @@ function custom_echo($x, $length)
                             </label>
                         </td>
                         <td>{{ $courriers->id }}</td>
-                        <td>{{ custom_echo( $courriers->sender, 12) }}</td>
-                        <td>{{ custom_echo( $courriers->receiver, 12) }}</td>
-                        <td>{{ custom_echo( $courriers->subject, 12) }}</td>
-                        <td>{{ custom_echo( $courriers->object, 12) }}</td>
-                        <td>{{ custom_echo( $courriers->treater, 12) }}</td>
-                        <td>{{ custom_echo( $courriers->urgency, 12) }}</td>
-                        <td>{{ custom_echo( $courriers->status, 12) }}</td>
-                        <td>{{ custom_echo( $courriers->receptionDate, 12) }}</td>
+                        <td>{{ custom_echo( $courriers->expediteur, 12) }}</td>
+                        <td>{{ custom_echo( $courriers->recepteur, 12) }}</td>
+                        <td>{{ custom_echo( $courriers->sujet, 12) }}</td>
+                        <td>{{ custom_echo( $courriers->objet, 12) }}</td>
+                        <td>{{ custom_echo( $courriers->traiterPar, 12) }}</td>
+                        <td>{{ custom_echo( $courriers->urgence, 12) }}</td>
+                        <td>{{ custom_echo( $courriers->statut, 12) }}</td>
+                        <td>{{ custom_echo( $courriers->dateReception, 12) }}</td>
                         <td>
                             <a href="{{ route('courriers_'.Auth()->user()->role.'.show', $courriers->id)}}"
                                class="btn btn-primary btn-sm"><i class="far fa-eye"></i></a>

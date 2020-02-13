@@ -60,7 +60,7 @@ function custom_echo($x, $length)
             <?php $i = 0; ?>
             @foreach($courrier as $courriers)
                 @if(Auth()->user()->role != 'dv')
-                    @if($courriers->status < 3)
+                    @if($courriers->statut < 3)
                         <tr>
                             <td class="bs-checkbox">
                                 <label>
@@ -68,14 +68,14 @@ function custom_echo($x, $length)
                                 </label>
                             </td>
                             <td>{{ $courriers->id }}</td>
-                            <td>{{ custom_echo( $courriers->sender, 12) }}</td>
-                            <td>{{ custom_echo( $courriers->receiver, 12) }}</td>
-                            <td>{{ custom_echo( $courriers->subject, 12) }}</td>
-                            <td>{{ custom_echo( $courriers->object, 12) }}</td>
-                            <td>{{ custom_echo( $courriers->treater, 12) }}</td>
-                            <td>{{ custom_echo( $courriers->urgency, 12) }}</td>
-                            <td>{{ custom_echo( $courriers->status, 12) }}</td>
-                            <td>{{ custom_echo( $courriers->receptionDate, 12) }}</td>
+                            <td>{{ custom_echo( $courriers->expediteur, 12) }}</td>
+                            <td>{{ custom_echo( $courriers->recepteur, 12) }}</td>
+                            <td>{{ custom_echo( $courriers->sujet, 12) }}</td>
+                            <td>{{ custom_echo( $courriers->objet, 12) }}</td>
+                            <td>{{ custom_echo( $courriers->traiterPar, 12) }}</td>
+                            <td>{{ custom_echo( $courriers->urgence, 12) }}</td>
+                            <td>{{ custom_echo( $courriers->statut, 12) }}</td>
+                            <td>{{ custom_echo( $courriers->dateReception, 12) }}</td>
                             <td>
                                 <a href="{{ route('courriers_'.Auth()->user()->role.'.show', $courriers->id)}}"
                                    class="btn btn-primary btn-sm"><i class="far fa-eye"></i></a>
@@ -99,21 +99,21 @@ function custom_echo($x, $length)
                                         <div class="form-group hide">
                                             @csrf
                                             @method('PATCH')
-                                            <label for="name" hidden>
-                                                <input type="hidden" class="form-control" name="sender"
-                                                       value="{{ $courriers->sender }}"/>
+                                            <label for="expediteur" hidden>
+                                                <input type="hidden" class="form-control" name="expediteur"
+                                                       value="{{ $courriers->expediteur }}"/>
                                             </label>
                                         </div>
                                         <div class="form-group hide">
-                                            <label for="receiver" hidden>
-                                                <input type="hidden" class="form-control" name="receiver"
-                                                       value="{{ $courriers->receiver }}"/>
+                                            <label for="recepteur" hidden>
+                                                <input type="hidden" class="form-control" name="recepteur"
+                                                       value="{{ $courriers->recepteur }}"/>
                                             </label>
                                         </div>
                                         <div class="form-group hide">
-                                            <label for="subject" hidden>
-                                                <input type="hidden" class="form-control" name="subject"
-                                                       value="{{ $courriers->subject }}"/>
+                                            <label for="sujet" hidden>
+                                                <input type="hidden" class="form-control" name="sujet"
+                                                       value="{{ $courriers->sujet }}"/>
                                             </label>
                                         </div>
                                         <div class="form-group hide">
@@ -123,47 +123,106 @@ function custom_echo($x, $length)
                                             </label>
                                         </div>
                                         <div class="form-group hide">
-                                            <label for="comments" hidden>
-                                            <textarea rows="8" cols="50" class="form-control" placeholder="comments"
-                                                      name="comments" hidden>{{ $courriers->comments }}</textarea>
+                                            <label for="commentaires" hidden>
+                                            <textarea rows="8" cols="50" class="form-control" placeholder="commentaires"
+                                                      name="commentaires"
+                                                      hidden>{{ $courriers->commentaires }}</textarea>
                                             </label>
                                         </div>
                                         <div class="form-group hide">
-                                            <label for="object" hidden>
-                                                <input type="hidden" class="form-control" name="object"
-                                                       value="{{ $courriers->object }}"/>
+                                            <label for="objet" hidden>
+                                                <input type="hidden" class="form-control" name="objet"
+                                                       value="{{ $courriers->objet }}"/>
                                             </label>
                                         </div>
-                                        <div class="form-group hide">
-                                            <label for="treater" hidden>
-                                                <input type="hidden" class="form-control" name="treater"
-                                                       value="{{ $courriers->treater }}"/>
-                                            </label>
-                                        </div>
-                                        <div class="form-group hide">
-                                            <label for="urgency" hidden>
-                                                <input type="hidden" max="3" min="1" placeholder="1"
+                                        @if( strpos($courriers->traiterPar , 'DEU') !== false )
+                                            <div class="custom-control custom-checkbox col-md-3 hide" hidden>
+                                                <input type="hidden" class="custom-control-input" id="DEU"
+                                                       name="traiterPar[]"
+                                                       value="DEU"
+                                                       checked>
+                                                <label class="custom-control-label" for="DEU" hidden>DEU</label>
+                                            </div>@endif
+                                        @if( strpos($courriers->traiterPar , 'DGU') !== false )
+                                            <div class="custom-control custom-checkbox col-md-3 hide" hidden>
+                                                <input type="hidden" class="custom-control-input" id="DGU"
+                                                       name="traiterPar[]"
+                                                       value="DGU"
+                                                       checked>
+                                                <label class="custom-control-label" for="DGU" hidden>DGU</label>
+                                            </div> @endif
+                                        @if( strpos($courriers->traiterPar , 'DAJF,') !== false )
+                                            <div class="custom-control custom-checkbox col-md-3 hide" hidden>
+                                                <input type="hidden" class="custom-control-input" id="DAJF"
+                                                       name="traiterPar[]"
+                                                       value="DAJF"
+                                                       checked>
+                                                <label class="custom-control-label" for="DAJF" hidden>DAJF</label>
+                                            </div>@endif
+                                        @if( strpos($courriers->traiterPar , 'DAF') !== false )
+                                            <div class="custom-control custom-checkbox col-md-3 hide" hidden>
+                                                <input type="hidden" class="custom-control-input" id="DAF"
+                                                       name="traiterPar[]"
+                                                       value="DAF"
+                                                       checked>
+                                                <label class="custom-control-label" for="DAF" hidden>DAF</label>
+                                            </div> @endif
+                                        @if( strpos($courriers->traiterPar , 'Mr.Chafki') !== false )
+                                            <div class="custom-control custom-checkbox col-md-3 hide" hidden>
+                                                <input type="hidden" class="custom-control-input" id="Mr.Chafki"
+                                                       name="traiterPar[]" value="Mr.Chafki"
+                                                       checked>
+                                                <label class="custom-control-label" for="Mr.Chafki"
+                                                       hidden>Mr.Chafki</label>
+                                            </div>@endif
+                                        @if( strpos($courriers->traiterPar , 'Mr.Abdouh') !== false )
+                                            <div class="custom-control custom-checkbox col-md-3 hide" hidden>
+                                                <input type="hidden" class="custom-control-input" id="Mr.Abdouh"
+                                                       name="traiterPar[]" value="Mr.Abdouh"
+                                                       checked>
+                                                <label class="custom-control-label" for="Mr.Abdouh"
+                                                       hidden>Mr.Abdouh</label>
+                                            </div>@endif
+                                        @if( strpos($courriers->traiterPar , 'SI') !== false )
+                                            <div class="custom-control custom-checkbox col-md-3 hide" hidden>
+                                                <input type="hidden" class="custom-control-input" id="SI"
+                                                       name="traiterPar[]"
+                                                       value="SI"
+                                                       checked>
+                                                <label class="custom-control-label" for="SI" hidden>SI</label>
+                                            </div>@endif
+                                        @if( strpos($courriers->traiterPar , 'SD') !== false )
+                                            <div class="custom-control custom-checkbox col-md-3 hide" hidden>
+                                                <input type="hidden" class="custom-control-input" id="SD"
+                                                       name="traiterPar[]"
+                                                       value="SD"
+                                                       checked>
+                                                <label class="custom-control-label" for="SD" hidden>SD</label>
+                                            </div>@endif
+                                        <div class="form-group hide" hidden>
+                                            <label for="urgence" hidden>
+                                                <input type="hidden" max="3" min="1"
                                                        class="form-control"
-                                                       name="urgency"
-                                                       value="{{ $courriers->urgency }}"/>
+                                                       name="urgence"
+                                                       value="{{ $courriers->urgence }}"/>
                                             </label>
                                         </div>
-                                        <div class="form-group hide">
-                                            <label for="receptionDate" hidden>
-                                                <input type="hidden" class="form-control" name="receptionDate"
-                                                       value="{{ $courriers->receptionDate }}"/>
+                                        <div class="form-group hide" hidden>
+                                            <label for="dateReception" hidden>
+                                                <input type="hidden" class="form-control" name="dateReception"
+                                                       value="{{ $courriers->dateReception }}"/>
                                             </label>
                                         </div>
-                                        <div class="form-group hide">
-                                            <label for="traitment" hidden>
-                                            <textarea rows="8" cols="50" class="form-control" placeholder="traitment"
-                                                      name="traitment" hidden>{{ $courriers->traitment }}</textarea>
+                                        <div class="form-group hide" hidden>
+                                            <label for="traitement" hidden>
+                                            <textarea rows="8" cols="50" class="form-control" placeholder="traitement"
+                                                      name="traitement" hidden>{{ $courriers->traitement }}</textarea>
                                             </label>
                                         </div>
-                                        <div class="form-group hide">
+                                        <div class="form-group hide" hidden>
                                             @csrf
                                             @method('PATCH')
-                                            <input type="hidden" value="3" name="status"/>
+                                            <input type="hidden" value="3" name="statut"/>
                                         </div>
                                         <button type="submit" class="btn btn-info"><i class="fas fa-box-open"></i>
                                         </button>
@@ -173,7 +232,7 @@ function custom_echo($x, $length)
                         </tr>
                     @endif
                 @else
-                    @if( strpos($courriers->treater, Auth()->user()->name) !== false)
+                    @if( strpos($courriers->traiterPar, Auth()->user()->name) !== false)
                         <tr>
                             <td class="bs-checkbox">
                                 <label>
@@ -181,14 +240,14 @@ function custom_echo($x, $length)
                                 </label>
                             </td>
                             <td>{{ $courriers->id }}</td>
-                            <td>{{ custom_echo( $courriers->sender, 12) }}</td>
-                            <td>{{ custom_echo( $courriers->receiver, 12) }}</td>
-                            <td>{{ custom_echo( $courriers->subject, 12) }}</td>
-                            <td>{{ custom_echo( $courriers->object, 12) }}</td>
-                            <td>{{ custom_echo( $courriers->treater, 12) }}</td>
-                            <td>{{ custom_echo( $courriers->urgency, 12) }}</td>
-                            <td>{{ custom_echo( $courriers->status, 12) }}</td>
-                            <td>{{ custom_echo( $courriers->receptionDate, 12) }}</td>
+                            <td>{{ custom_echo( $courriers->expediteur, 12) }}</td>
+                            <td>{{ custom_echo( $courriers->recepteur, 12) }}</td>
+                            <td>{{ custom_echo( $courriers->sujet, 12) }}</td>
+                            <td>{{ custom_echo( $courriers->objet, 12) }}</td>
+                            <td>{{ custom_echo( $courriers->traiterPar, 12) }}</td>
+                            <td>{{ custom_echo( $courriers->urgence, 12) }}</td>
+                            <td>{{ custom_echo( $courriers->statut, 12) }}</td>
+                            <td>{{ custom_echo( $courriers->dateReception, 12) }}</td>
                             <td>
                                 <a href="{{ route('courriers_'.Auth()->user()->role.'.show', $courriers->id)}}"
                                    class="btn btn-primary btn-sm"><i class="far fa-eye"></i></a>

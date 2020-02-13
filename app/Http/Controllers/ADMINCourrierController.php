@@ -46,26 +46,27 @@ class ADMINCourrierController extends Controller
     {
         if (Auth::check() && Auth()->user()->role == 'admin') {
             $storeData = $request->validate([
-                'sender' => 'required|max:255',
-                'receiver' => 'required|max:255',
-                'subject' => 'required|max:255',
+                'expediteur' => 'required|max:255',
+                'recepteur' => 'required|max:255',
+                'sujet' => 'required|max:255',
                 'corps' => 'required|max:500',
-                'comments' => 'max:500',
-                'object' => 'required|max:255',
-                'treater' => 'max:255',
-                'urgency' => 'required|numeric',
-                'status' => 'required|numeric',
-                'receptionDate' => 'required|date',
-                'traitment' => 'max:500',
+                'commentaires' => 'max:500',
+                'objet' => 'required|max:255',
+                'traiterPar' => 'max:255',
+                'urgence' => 'required|numeric',
+                'statut' => 'required|numeric',
+                'dateReception' => 'required|date',
+                'traitement' => 'max:500',
             ]);
-            $traits = $request->input('treater');
+            $traits = $request->input('traiterPar');
             $string = '';
-            foreach ($traits as $trait) {
-                $string .= $trait;
-                $string .= ',';
-            }
+            if (isset($traits))
+                foreach ($traits as $trait) {
+                    $string .= $trait;
+                    $string .= ',';
+                }
 
-            $storeData['treater'] = $string;
+            $storeData['traiterPar'] = $string;
 
             Courrier::create($storeData);
 
@@ -120,19 +121,27 @@ class ADMINCourrierController extends Controller
     {
         if (Auth::check() && Auth()->user()->role == 'admin') {
             $updateData = $request->validate([
-                'sender' => 'required|max:255',
-                'receiver' => 'required|max:255',
-                'subject' => 'required|max:255',
+                'expediteur' => 'required|max:255',
+                'recepteur' => 'required|max:255',
+                'sujet' => 'required|max:255',
                 'corps' => 'required|max:500',
-                'comments' => 'max:500',
-                'object' => 'required|max:255',
-                'treater' => 'required|max:255',
-                'urgency' => 'required|numeric',
-                'status' => 'required|numeric',
-                'receptionDate' => 'required|date',
-                'traitment' => 'max:500',
+                'commentaires' => 'max:500',
+                'objet' => 'required|max:255',
+                'traiterPar' => 'max:255',
+                'urgence' => 'required|numeric',
+                'statut' => 'required|numeric',
+                'dateReception' => 'required|date',
+                'traitement' => 'max:500',
                 'attachments' => 'file|mimes:jpeg,bmp,png,jpg,pdf,zip|max:20000',
             ]);
+            $traits = $request->input('traiterPar');
+            $string = '';
+            foreach ($traits as $trait) {
+                $string .= $trait;
+                $string .= ',';
+            }
+
+            $updateData['traiterPar'] = $string;
             Courrier::whereId($id)->update($updateData);
             return redirect('/courriers_admin')->with('completed', 'Courrier has been updated');
         } else

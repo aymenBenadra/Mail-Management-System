@@ -111,17 +111,25 @@ class DRCourrierController extends Controller
     {
         if(Auth::check() && Auth()->user()->role == 'dr') {
             $updateData = $request->validate([
-                'sender' => 'required|max:255',
-                'receiver' => 'required|max:255',
-                'subject' => 'required|max:255',
+                'expediteur' => 'required|max:255',
+                'recepteur' => 'required|max:255',
+                'sujet' => 'required|max:255',
                 'corps' => 'required|max:500',
-                'comments' => 'max:500',
-                'object' => 'required|max:255',
-                'treater' => 'required|max:255',
-                'urgency' => 'required|numeric',
-                'status' => 'required|numeric',
-                'receptionDate' => 'required|date',
+                'commentaires' => 'max:500',
+                'objet' => 'required|max:255',
+                'traiterPar' => 'max:255',
+                'urgence' => 'required|numeric',
+                'statut' => 'required|numeric',
+                'dateReception' => 'required|date',
             ]);
+            $traits = $request->input('traiterPar');
+            $string = '';
+            foreach ($traits as $trait) {
+                $string .= $trait;
+                $string .= ',';
+            }
+
+            $updateData['traiterPar'] = $string;
             Courrier::whereId($id)->update($updateData);
             return redirect('/courriers_dr')->with('completed', 'Courrier has been updated');
         }

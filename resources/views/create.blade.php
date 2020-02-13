@@ -22,20 +22,20 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             @csrf
-                            <label for="sender">Sender</label>
-                            <input type="text" class="form-control" name="sender" id="sender"/>
+                            <label for="expediteur">expediteur</label>
+                            <input type="text" class="form-control" name="expediteur" id="expediteur"/>
                         </div>
                         <div class="form-group">
-                            <label for="receiver">Receiver</label>
-                            <input type="text" class="form-control" name="receiver" id="receiver"/>
+                            <label for="recepteur">recepteur</label>
+                            <input type="text" class="form-control" name="recepteur" id="recepteur"/>
                         </div>
                         <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <input type="text" class="form-control" name="subject" id="subject"/>
+                            <label for="sujet">sujet</label>
+                            <input type="text" class="form-control" name="sujet" id="sujet"/>
                         </div>
                         <div class="form-group">
-                            <label for="object">Object</label>
-                            <input type="text" class="form-control" name="object" id="object"/>
+                            <label for="objet">objet</label>
+                            <input type="text" class="form-control" name="objet" id="objet"/>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -54,22 +54,23 @@
                             <div class="container">
                                 <div class="form-row ml-2">
                                     <div class="custom-control custom-checkbox col-md-3">
-                                        <input type="checkbox" class="custom-control-input" id="DEU" name="treater[]"
+                                        <input type="checkbox" class="custom-control-input" id="DEU" name="traiterPar[]"
                                                value="DEU">
                                         <label class="custom-control-label" for="DEU">DEU</label>
                                     </div>
                                     <div class="custom-control custom-checkbox col-md-3">
-                                        <input type="checkbox" class="custom-control-input" id="DGU" name="treater[]"
+                                        <input type="checkbox" class="custom-control-input" id="DGU" name="traiterPar[]"
                                                value="DGU">
                                         <label class="custom-control-label" for="DGU">DGU</label>
                                     </div>
                                     <div class="custom-control custom-checkbox col-md-3">
-                                        <input type="checkbox" class="custom-control-input" id="DAJF" name="treater[]"
+                                        <input type="checkbox" class="custom-control-input" id="DAJF"
+                                               name="traiterPar[]"
                                                value="DAJF">
                                         <label class="custom-control-label" for="DAJF">DAJF</label>
                                     </div>
                                     <div class="custom-control custom-checkbox col-md-3">
-                                        <input type="checkbox" class="custom-control-input" id="DAF" name="treater[]"
+                                        <input type="checkbox" class="custom-control-input" id="DAF" name="traiterPar[]"
                                                value="DAF">
                                         <label class="custom-control-label" for="DAF">DAF</label>
                                     </div>
@@ -77,21 +78,21 @@
                                 <div class="form-row ml-2">
                                     <div class="custom-control custom-checkbox col-md-3">
                                         <input type="checkbox" class="custom-control-input" id="Mr.Chafki"
-                                               name="treater[]" value="Mr.Chafki">
+                                               name="traiterPar[]" value="Mr.Chafki">
                                         <label class="custom-control-label" for="Mr.Chafki">Mr.Chafki</label>
                                     </div>
                                     <div class="custom-control custom-checkbox col-md-3">
                                         <input type="checkbox" class="custom-control-input" id="Mr.Abdouh"
-                                               name="treater[]" value="Mr.Abdouh">
+                                               name="traiterPar[]" value="Mr.Abdouh">
                                         <label class="custom-control-label" for="Mr.Abdouh">Mr.Abdouh</label>
                                     </div>
                                     <div class="custom-control custom-checkbox col-md-3">
-                                        <input type="checkbox" class="custom-control-input" id="SI" name="treater[]"
+                                        <input type="checkbox" class="custom-control-input" id="SI" name="traiterPar[]"
                                                value="SI">
                                         <label class="custom-control-label" for="SI">SI</label>
                                     </div>
                                     <div class="custom-control custom-checkbox col-md-3">
-                                        <input type="checkbox" class="custom-control-input" id="SD" name="treater[]"
+                                        <input type="checkbox" class="custom-control-input" id="SD" name="traiterPar[]"
                                                value="SD">
                                         <label class="custom-control-label" for="SD">SD</label>
                                     </div>
@@ -99,42 +100,42 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="urgency">Urgency</label>
+                            <label for="urgence">Urgence</label>
                             <input type="number" max="3" min="1" placeholder="1" class="form-control"
-                                   name="urgency" id="urgency"/>
+                                   name="urgence" id="urgence"/>
                         </div>
                         <div class="form-group">
-                            <label for="receptionDate">Reception date</label>
-                            <input type="date" class="form-control" name="receptionDate" id="receptionDate"/>
+                            <label for="dateReception">Date Reception</label>
+                            <input type="date" class="form-control" name="dateReception" id="dateReception"/>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="comments">Comments</label>
+                            <label for="commentaires">commentaires</label>
                             <textarea rows="9" cols="50" class="form-control" placeholder="comments"
-                                      name="comments" id="comments"></textarea>
+                                      name="commentaires" id="commentaires"></textarea>
                         </div>
                     </div>
                 </div>
                 <hr>
                 @if(Auth()->user()->role == 'bo')
                     <div class="form-group">
-                        <input type="hidden" value="1" name="status"/>
+                        <input type="hidden" value="1" name="statut"/>
                     </div>
                 @elseif(Auth()->user()->role == 'admin')
                     <div class="form-row push-top">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="traitment">Traitment</label>
+                                <label for="traitement">traitement</label>
                                 <textarea rows="8" cols="50" class="form-control" placeholder="traitment"
-                                          name="traitment" id="traitment"></textarea>
+                                          name="traitement" id="traitement"></textarea>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="status">Status</label>
+                                <label for="statut">statut</label>
                                 <input type="number" max="3" min="1" class="form-control" placeholder="1"
-                                       name="status" id="status"/>
+                                       name="statut" id="statut"/>
                             </div>
                         </div>
                     </div>
