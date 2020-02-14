@@ -5,12 +5,12 @@
     <div class="card push-top push-bottom">
         <div class="card-header">
             <div class="row text-center">
-                <a href="{{ route('courriers_'.Auth()->user()->role.'.index') }}" class="card-link col-md-4">Return to
-                    index</a>
-                <p class="col-md-4">Show Courrier</p>
+                <a href="{{ route('courriers_'.Auth()->user()->role.'.index') }}" class="card-link col-md-4">Retourner à
+                    l'index</a>
+                <p class="col-md-4">Montrer un courrier</p>
                 @if(Auth()->user()->role == 'admin' or Auth()->user()->role == 'bo')
-                    <a href="{{ route('courriers_'.Auth()->user()->role.'.create') }}" class="card-link col-md-4">Create
-                        new courrier</a>
+                    <a href="{{ route('courriers_'.Auth()->user()->role.'.create') }}" class="card-link col-md-4">Créer
+                        un nouveau courrier</a>
                 @endif
             </div>
         </div>
@@ -32,22 +32,22 @@
                             <div class="form-group">
                                 @csrf
                                 @method('PATCH')
-                                <label for="expediteur">Sender</label>
+                                <label for="expediteur">Expediteur</label>
                                 <input type="text" class="form-control" name="expediteur" id="expediteur"
                                        value="{{ $courrier->expediteur }}" readonly/>
                             </div>
                             <div class="form-group">
-                                <label for="recepteur">Receiver</label>
+                                <label for="recepteur">Recepteur</label>
                                 <input type="text" class="form-control" name="recepteur" id="recepteur"
                                        value="{{ $courrier->recepteur }}" readonly/>
                             </div>
                             <div class="form-group">
-                                <label for="sujet">Subject</label>
+                                <label for="sujet">Sujet</label>
                                 <input type="text" class="form-control" name="sujet" id="sujet"
                                        value="{{ $courrier->sujet }}" readonly/>
                             </div>
                             <div class="form-group">
-                                <label for="objet">Object</label>
+                                <label for="objet">Objet</label>
                                 <input type="text" class="form-control" name="objet" id="objet"
                                        value="{{ $courrier->objet }}" readonly/>
                             </div>
@@ -64,7 +64,7 @@
                     <div class="form-row push-top">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="treater">Traiter (treater 1, treater 2...)</label><br>
+                                <label for="treater">Traiter par(treater 1, treater 2...)</label><br>
                                 <div class="container">
                                     <div class="form-row ml-2">
                                         <div class="custom-control custom-checkbox col-md-3">
@@ -127,19 +127,19 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="urgence">Urgency</label>
+                                <label for="urgence">Urgence</label>
                                 <input type="number" max="3" min="1" placeholder="1" class="form-control"
                                        name="urgence" id="urgence" value="{{ $courrier->urgence }}" readonly/>
                             </div>
                             <div class="form-group">
-                                <label for="dateReception">Reception date</label>
+                                <label for="dateReception">Date de reception</label>
                                 <input type="date" class="form-control" name="dateReception" id="dateReception"
                                        value="{{ $courrier->dateReception }}" readonly/>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="commentaires">Comments</label>
+                                <label for="commentaires">Commentaires</label>
                                 <textarea rows="9" cols="50" class="form-control" placeholder="commentaires"
                                           name="commentaires" id="commentaires"
                                           readonly>{{ $courrier->commentaires }}</textarea>
@@ -156,9 +156,9 @@
                             @csrf
                             @method('PATCH')
                         @endif
-                        <label for="traitement">Traitment</label>
-                        <textarea rows="8" cols="50" class="form-control" placeholder="traitement"
-                                  name="traitement" id="traitement" readonly>{{ $courrier->traitement }}</textarea>
+                            <label for="traitement">Traitement</label>
+                            <textarea rows="8" cols="50" class="form-control" placeholder="traitement"
+                                      name="traitement" id="traitement" readonly>{{ $courrier->traitement }}</textarea>
                     </div>
                     <?php if (Auth()->user()->role == 'admin') {
                         echo('</div>');
@@ -171,7 +171,7 @@
                 @elseif(Auth()->user()->role == 'admin')
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="statut">Status</label>
+                            <label for="statut">Statut</label>
                             <input type="number" class="form-control" id="statut" max="3" min="1"
                                    value="{{ $courrier->statut }}" name="statut" readonly/>
                         </div>
@@ -188,12 +188,11 @@
             <div class="card-footer text-muted">
                 <div class="row text-center">
                     <a href="{{ route('courriers_'.Auth()->user()->role.'.index') }}"
-                       class="card-link col-md-4 d-inline-block">Return to
-                        index</a>
-                    <p class="col-md-4">Show Courrier</p>
+                       class="card-link col-md-4 d-inline-block">Retourner à l'index</a>
+                    <p class="col-md-4">Montrer un courrier</p>
                     @if(Auth()->user()->role == 'admin' or Auth()->user()->role == 'bo')
                         <a href="{{ route('courriers_'.Auth()->user()->role.'.create') }}"
-                           class="card-link col-md-4 d-inline-block">Create new courrier</a>
+                           class="card-link col-md-4 d-inline-block">Créer un nouveau courrier</a>
                     @endif
                 </div>
             </div>

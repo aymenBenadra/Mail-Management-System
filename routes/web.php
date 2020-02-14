@@ -15,16 +15,17 @@
 use Illuminate\Support\Facades\Route;
 
 // Archive routes
-Route::get('courriers_admin/archive', 'ArchiveController@archive')->name('courriers_admin.archive');
-Route::get('courriers_dv/archive', 'ArchiveController@archive')->name('courriers_dv.archive');
-Route::get('courriers_dr/archive', 'ArchiveController@archive')->name('courriers_dr.archive');
-Route::get('courriers_bo/archive', 'ArchiveController@archive')->name('courriers_bo.archive');
+Route::get('courriers_admin/archive/{type}', 'ArchiveController@archive')->name('courriers_admin.archive');
+Route::get('courriers_dv/archive/{type}', 'ArchiveController@archive')->name('courriers_dv.archive');
+Route::get('courriers_dr/archive/{type}', 'ArchiveController@archive')->name('courriers_dr.archive');
+Route::get('courriers_bo/archive/{type}', 'ArchiveController@archive')->name('courriers_bo.archive');
 
 // Main routes to create, index, show, update, destroy...
 Route::resource('courriers_admin', 'ADMINCourrierController');
 Route::resource('courriers_dv', 'DVCourrierController');
 Route::resource('courriers_bo', 'BOCourrierController');
 Route::resource('courriers_dr', 'DRCourrierController');
+Route::resource('courriers_OUT', 'OutCourrierController');
 
 // Login route
 Route::get('login', 'LoginProcessController@login')->name('login');

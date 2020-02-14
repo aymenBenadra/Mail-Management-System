@@ -17,23 +17,9 @@ class DRCourrierController extends Controller
     {
         if (Auth::check() && Auth()->user()->role == 'dr') {
             $courrier = Courrier::all();
-            return view('index', compact('courrier'));
+            return view('IN.index', compact('courrier'));
         } else
-            return view('login')->with('Warning!', 'login first to get to this page.');
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function archive()
-    {
-        if (Auth::check() && Auth()->user()->role == 'dr') {
-            $courrier = Courrier::all();
-            return view('archive', compact('courrier'));
-        } else
-            return view('login')->with('Warning!', 'login first to get to this page.');
+            return view('IN.login')->with('Warning!', 'login first to get to this page.');
     }
 
     /**
@@ -48,41 +34,42 @@ class DRCourrierController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      */
-    public function store(Request $request){}
+    public function store(Request $request)
+    {
+    }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show($id)
     {
-        if(Auth::check() && Auth()->user()->role == 'dr') {
+        if (Auth::check() && Auth()->user()->role == 'dr') {
             // get the courrier
             $courrier = Courrier::findOrFail($id);
             // show the view and pass the nerd to it
-            return view('show', compact('courrier'));
-        }
-        else
-            return view('login') -> with('Warning!', 'login first to get to this page.');
+            return view('IN.show', compact('courrier'));
+        } else
+            return view('IN.login')->with('Warning!', 'login first to get to this page.');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($id)
     {
         if (Auth::check() && Auth()->user()->role == 'dr') {
             $courrier = Courrier::findOrFail($id);
-            return view('edit', compact('courrier'));
+            return view('IN.edit', compact('courrier'));
         } else
-            return view('login')->with('Warning!', 'login first to get to this page.');
+            return view('IN.login')->with('Warning!', 'login first to get to this page.');
     }
 
     /**
@@ -95,9 +82,9 @@ class DRCourrierController extends Controller
     {
         if (Auth::check() && Auth()->user()->role == 'admin') {
             $courrier = Courrier::findOrFail($id);
-            return view('update', compact('courrier'));
+            return view('IN.update', compact('courrier'));
         } else
-            return view('login')->with('Warning!', 'login first to get to this page.');
+            return view('IN.login')->with('Warning!', 'login first to get to this page.');
     }
 
     /**
@@ -109,12 +96,13 @@ class DRCourrierController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if(Auth::check() && Auth()->user()->role == 'dr') {
+        if (Auth::check() && Auth()->user()->role == 'dr') {
             $updateData = $request->validate([
                 'expediteur' => 'required|max:255',
                 'recepteur' => 'required|max:255',
                 'sujet' => 'required|max:255',
-                'corps' => 'required|max:500',
+                'corps' => 'max:500',
+                'type' => 'max:5',
                 'commentaires' => 'max:500',
                 'objet' => 'required|max:255',
                 'traiterPar' => 'max:255',
@@ -124,17 +112,17 @@ class DRCourrierController extends Controller
             ]);
             $traits = $request->input('traiterPar');
             $string = '';
-            foreach ($traits as $trait) {
-                $string .= $trait;
-                $string .= ',';
-            }
+            if (!empty($traits))
+                foreach ($traits as $trait) {
+                    $string .= $trait;
+                    $string .= ',';
+                }
 
             $updateData['traiterPar'] = $string;
             Courrier::whereId($id)->update($updateData);
             return redirect('/courriers_dr')->with('completed', 'Courrier has been updated');
-        }
-        else
-            return view('login') -> with('Warning!', 'login first to get to this page.');
+        } else
+            return view('IN.login')->with('Warning!', 'login first to get to this page.');
     }
 
     /**

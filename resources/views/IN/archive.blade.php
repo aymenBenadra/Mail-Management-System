@@ -43,15 +43,15 @@ function custom_echo($x, $length)
             <tr>
                 <th data-field="state" data-checkbox="true">State</th>
                 <th data-field="ref" data-filter-control="input" data-sortable="true" scope="col">REF</th>
-                <th data-field="sender" data-filter-control="input" scope="col">sender</th>
-                <th data-field="receiver" data-filter-control="input" scope="col">receiver</th>
-                <th data-field="subject" data-filter-control="input" scope="col">subject</th>
-                <th data-field="object" data-filter-control="input" scope="col">object</th>
-                <th data-field="traiter" data-filter-control="input" scope="col">treater</th>
-                <th data-field="urgency" data-filter-control="select" data-sortable="true" scope="col">urgency</th>
-                <th data-field="status" data-filter-control="select" data-sortable="true" scope="col">status</th>
+                <th data-field="sender" data-filter-control="input" scope="col">Expediteur</th>
+                <th data-field="receiver" data-filter-control="input" scope="col">Recepteur</th>
+                <th data-field="subject" data-filter-control="input" scope="col">Sujet</th>
+                <th data-field="object" data-filter-control="input" scope="col">Objet</th>
+                <th data-field="traiter" data-filter-control="input" scope="col">Traiter par</th>
+                <th data-field="urgency" data-filter-control="select" data-sortable="true" scope="col">Urgence</th>
+                <th data-field="status" data-filter-control="select" data-sortable="true" scope="col">Statut</th>
                 <th data-field="receptionDate" data-filter-control="input" data-sortable="true" scope="col">
-                    receptionDate
+                    Date de reception
                 </th>
                 <th data-field="action" scope="col" class="text-center w-100">Action</th>
             </tr>
@@ -60,7 +60,7 @@ function custom_echo($x, $length)
             <?php $i = 0; ?>
             @foreach($courrier as $courriers)
                 @if(Auth()->user()->role != 'dv')
-                    @if($courriers->statut == 3)
+                    @if($courriers->statut == 3 and $courriers->type == 'in')
                         <tr>
                             <td class="bs-checkbox">
                                 <label>
@@ -94,7 +94,7 @@ function custom_echo($x, $length)
                         </tr>
                     @endif
                 @else
-                    @if( strpos($courriers->traiterPar, Auth()->user()->name) !== false and $courriers->statut == 3)
+                    @if( strpos($courriers->traiterPar, Auth()->user()->name) !== false and $courriers->statut == 3 and $courriers->type == 'in')
                         <tr>
                             <td class="bs-checkbox">
                                 <label>

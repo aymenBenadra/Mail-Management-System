@@ -14,11 +14,11 @@ class ArchiveController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function archive()
+    public function archive($type)
     {
         if (Auth::check()) {
             $courrier = Courrier::all();
-            return view('archive', compact('courrier'));
+            return view($type . '.archive', compact('courrier'));
         } else
             return view('login')->with('Warning!', 'login first to get to this page.');
     }

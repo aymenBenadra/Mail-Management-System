@@ -4,9 +4,12 @@
 
     <div class="card push-top push-bottom">
         <div class="card-header text-center">
-            Add Courrier
+            <div class="row text-center">
+                <a href="{{ route('courriers_'.Auth()->user()->role.'.index') }}" class="card-link col-md-4">Retourner à
+                    l'index</a>
+                <p class="col-md-4">Créer des courriers</p>
+            </div>
         </div>
-
         <div class="card-body">
             @if ($errors->any())
                 <div class="alert alert-danger">
@@ -22,19 +25,19 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             @csrf
-                            <label for="expediteur">expediteur</label>
+                            <label for="expediteur">Expediteur<span style="color: darkred">*</span></label>
                             <input type="text" class="form-control" name="expediteur" id="expediteur"/>
                         </div>
                         <div class="form-group">
-                            <label for="recepteur">recepteur</label>
+                            <label for="recepteur">Recepteur<span style="color: darkred">*</span></label>
                             <input type="text" class="form-control" name="recepteur" id="recepteur"/>
                         </div>
                         <div class="form-group">
-                            <label for="sujet">sujet</label>
+                            <label for="sujet">Sujet<span style="color: darkred">*</span></label>
                             <input type="text" class="form-control" name="sujet" id="sujet"/>
                         </div>
                         <div class="form-group">
-                            <label for="objet">objet</label>
+                            <label for="objet">Objet<span style="color: darkred">*</span></label>
                             <input type="text" class="form-control" name="objet" id="objet"/>
                         </div>
                     </div>
@@ -50,7 +53,7 @@
                 <div class="form-row push-top">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="treater">Traiter (treater 1, treater 2...)</label><br>
+                            <label>Traiter par(treater 1, treater 2...)</label><br>
                             <div class="container">
                                 <div class="form-row ml-2">
                                     <div class="custom-control custom-checkbox col-md-3">
@@ -100,18 +103,18 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="urgence">Urgence</label>
-                            <input type="number" max="3" min="1" placeholder="1" class="form-control"
+                            <label for="urgence">Urgence<span style="color: darkred">*</span></label>
+                            <input type="number" max="3" min="1" class="form-control"
                                    name="urgence" id="urgence"/>
                         </div>
                         <div class="form-group">
-                            <label for="dateReception">Date Reception</label>
+                            <label for="dateReception">Date reception<span style="color: darkred">*</span></label>
                             <input type="date" class="form-control" name="dateReception" id="dateReception"/>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="commentaires">commentaires</label>
+                            <label for="commentaires">Commentaires</label>
                             <textarea rows="9" cols="50" class="form-control" placeholder="comments"
                                       name="commentaires" id="commentaires"></textarea>
                         </div>
@@ -126,22 +129,32 @@
                     <div class="form-row push-top">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="traitement">traitement</label>
+                                <label for="traitement">Traitement</label>
                                 <textarea rows="8" cols="50" class="form-control" placeholder="traitment"
                                           name="traitement" id="traitement"></textarea>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="statut">statut</label>
-                                <input type="number" max="3" min="1" class="form-control" placeholder="1"
+                                <label for="statut">Statut<span style="color: darkred">*</span></label>
+                                <input type="number" max="3" min="1" class="form-control"
                                        name="statut" id="statut"/>
                             </div>
                         </div>
                     </div>
                 @endif
-                <button type="submit" class="btn btn-block btn-primary">Create Courrier</button>
+                <div class="form-group">
+                    <input type="hidden" value="in" name="type"/>
+                </div>
+                <button type="submit" class="btn btn-block btn-primary">Créer un nouveau courrier</button>
             </form>
+        </div>
+        <div class="card-footer text-muted">
+            <div class="row text-center">
+                <a href="{{ route('courriers_'.Auth()->user()->role.'.index') }}"
+                   class="card-link col-md-4 d-inline-block">Retourner à l'index</a>
+                <p class="col-md-4">Créer des courriers</p>
+            </div>
         </div>
     </div>
 @endsection

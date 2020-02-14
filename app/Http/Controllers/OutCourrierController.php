@@ -6,7 +6,7 @@ use App\Courrier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class BOCourrierController extends Controller
+class OutCourrierController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,11 +15,11 @@ class BOCourrierController extends Controller
      */
     public function index()
     {
-        if (Auth::check() && Auth()->user()->role == 'bo') {
+        if (Auth::check() && Auth()->user()->role == 'admin') {
             $courrier = Courrier::all();
-            return view('IN.index', compact('courrier'));
+            return view('OUT.index', compact('courrier'));
         } else
-            return view('IN.login')->with('Warning!', 'login first to get to this page.');
+            return view('login')->with('Warning!', 'login first to get to this page.');
     }
 
     /**
@@ -29,7 +29,10 @@ class BOCourrierController extends Controller
      */
     public function create()
     {
-        return view('IN.create');
+        if (Auth::check() && Auth()->user()->role == 'admin') {
+            return view('OUT.create');
+        } else
+            return view('login')->with('Warning!', 'login first to get to this page.');
     }
 
     /**
@@ -40,7 +43,7 @@ class BOCourrierController extends Controller
      */
     public function store(Request $request)
     {
-        if (Auth::check() && Auth()->user()->role == 'bo') {
+        if (Auth::check() && Auth()->user()->role == 'admin') {
             $storeData = $request->validate([
                 'expediteur' => 'required|max:255',
                 'recepteur' => 'required|max:255',
@@ -49,15 +52,14 @@ class BOCourrierController extends Controller
                 'type' => 'max:5',
                 'commentaires' => 'max:500',
                 'objet' => 'required|max:255',
-                'urgence' => 'required|numeric',
-                'statut' => 'required|numeric',
-                'dateReception' => 'required|date',
+                'dateEnvoi' => 'required|date',
             ]);
             Courrier::create($storeData);
 
-            return redirect('/courriers_bo')->with('completed', 'Courrier has been saved!');
+            return redirect('/courriers_admin')->with('completed', 'Courrier has been saved!');
         } else
-            return view('IN.login')->with('Warning!', 'login first to get to this page.');
+            return view('login')->with('Warning!', 'login first to get to this page.');
+
     }
 
     /**
@@ -68,14 +70,15 @@ class BOCourrierController extends Controller
      */
     public function show($id)
     {
-        if (Auth::check() && Auth()->user()->role == 'bo') {
+        if (Auth::check() && Auth()->user()->role == 'admin') {
             // get the courrier
             $courrier = Courrier::findOrFail($id);
 
             // show the view and pass the nerd to it
-            return view('IN.show', compact('courrier'));
+            return view('OUT.show', compact('courrier'));
         } else
-            return view('IN.login')->with('Warning!', 'login first to get to this page.');
+            return view('login')->with('Warning!', 'login first to get to this page.');
+
     }
 
     /**
@@ -86,11 +89,11 @@ class BOCourrierController extends Controller
      */
     public function edit($id)
     {
-        if (Auth::check() && Auth()->user()->role == 'bo') {
+        if (Auth::check() && Auth()->user()->role == 'admin') {
             $courrier = Courrier::findOrFail($id);
-            return view('IN.edit', compact('courrier'));
+            return view('OUT.edit', compact('courrier'));
         } else
-            return view('IN.login')->with('Warning!', 'login first to get to this page.');
+            return view('login')->with('Warning!', 'login first to get to this page.');
     }
 
     /**
@@ -102,7 +105,7 @@ class BOCourrierController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if (Auth::check() && Auth()->user()->role == 'bo') {
+        if (Auth::check() && Auth()->user()->role == 'admin') {
             $updateData = $request->validate([
                 'expediteur' => 'required|max:255',
                 'recepteur' => 'required|max:255',
@@ -111,16 +114,15 @@ class BOCourrierController extends Controller
                 'type' => 'max:5',
                 'commentaires' => 'max:500',
                 'objet' => 'required|max:255',
-                'traiterPar' => 'max:255',
-                'urgence' => 'required|numeric',
-                'statut' => 'required|numeric',
-                'dateReception' => 'required|date',
+                'dateEnvoi' => 'required|date',
             ]);
             Courrier::whereId($id)->update($updateData);
-            return redirect('/courriers_bo')->with('completed', 'Courrier has been updated');
+
+            return redirect('/courriers_admin')->with('completed', 'Courrier has been updated');
         } else
-            return view('IN.login')->with('Warning!', 'login first to get to this page.');
+            return view('login')->with('Warning!', 'login first to get to this page.');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -130,6 +132,13 @@ class BOCourrierController extends Controller
      */
     public function destroy($id)
     {
-        return redirect('/courriers_bo')->with('warning', 'You don\'t have permission to get there!');
+        if (Auth::check() && Auth()->user()->role == 'admin') {
+            $courrier = Courrier::findOrFail($id);
+            $courrier->delete();
+
+            return redirect('/courriers_admin')->with('completed', 'Courrier has been deleted');
+        } else
+            return view('login')->with('Warning!', 'login first to get to this page.');
+
     }
 }

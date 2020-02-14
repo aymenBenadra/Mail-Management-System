@@ -17,23 +17,9 @@ class DVCourrierController extends Controller
     {
         if (Auth::check() && Auth()->user()->role == 'dv') {
             $courrier = Courrier::all();
-            return view('index', compact('courrier'));
+            return view('IN.index', compact('courrier'));
         } else
-            return view('login')->with('Warning!', 'login first to get to this page.');
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function archive()
-    {
-        if (Auth::check() && Auth()->user()->role == 'dv') {
-            $courrier = Courrier::all();
-            return view('archive', compact('courrier'));
-        } else
-            return view('login')->with('Warning!', 'login first to get to this page.');
+            return view('IN.login')->with('Warning!', 'login first to get to this page.');
     }
 
     /**
@@ -67,9 +53,9 @@ class DVCourrierController extends Controller
             $courrier = Courrier::findOrFail($id);
 
             // show the view and pass the nerd to it
-            return view('show', compact('courrier'));
+            return view('IN.show', compact('courrier'));
         } else
-            return view('login')->with('Warning!', 'login first to get to this page.');
+            return view('IN.login')->with('Warning!', 'login first to get to this page.');
 
     }
 
@@ -83,9 +69,9 @@ class DVCourrierController extends Controller
     {
         if (Auth::check() && Auth()->user()->role == 'dv') {
             $courrier = Courrier::findOrFail($id);
-            return view('edit', compact('courrier'));
+            return view('IN.edit', compact('courrier'));
         } else
-            return view('login')->with('Warning!', 'login first to get to this page.');
+            return view('IN.login')->with('Warning!', 'login first to get to this page.');
     }
 
     /**
@@ -104,7 +90,7 @@ class DVCourrierController extends Controller
             Courrier::whereId($id)->update($updateData);
             return redirect('/courriers_dv')->with('completed', 'Courrier has been updated');
         } else
-            return view('login')->with('Warning!', 'login first to get to this page.');
+            return view('IN.login')->with('Warning!', 'login first to get to this page.');
     }
 
     /**
