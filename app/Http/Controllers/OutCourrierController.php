@@ -15,7 +15,7 @@ class OutCourrierController extends Controller
      */
     public function index()
     {
-        if (Auth::check() && Auth()->user()->role == 'admin') {
+        if (Auth::check() && Auth()->user()->role != 'dv') {
             $courrier = Courrier::all();
             return view('OUT.index', compact('courrier'));
         } else
@@ -29,7 +29,7 @@ class OutCourrierController extends Controller
      */
     public function create()
     {
-        if (Auth::check() && Auth()->user()->role == 'admin') {
+        if (Auth::check() && Auth()->user()->role != 'dv') {
             return view('OUT.create');
         } else
             return view('login')->with('Warning!', 'login first to get to this page.');
@@ -43,7 +43,7 @@ class OutCourrierController extends Controller
      */
     public function store(Request $request)
     {
-        if (Auth::check() && Auth()->user()->role == 'admin') {
+        if (Auth::check() && Auth()->user()->role != 'dv') {
             $storeData = $request->validate([
                 'expediteur' => 'required|max:255',
                 'recepteur' => 'required|max:255',
@@ -70,7 +70,7 @@ class OutCourrierController extends Controller
      */
     public function show($id)
     {
-        if (Auth::check() && Auth()->user()->role == 'admin') {
+        if (Auth::check() && Auth()->user()->role != 'dv') {
             // get the courrier
             $courrier = Courrier::findOrFail($id);
 
@@ -89,7 +89,7 @@ class OutCourrierController extends Controller
      */
     public function edit($id)
     {
-        if (Auth::check() && Auth()->user()->role == 'admin') {
+        if (Auth::check() && Auth()->user()->role != 'dv') {
             $courrier = Courrier::findOrFail($id);
             return view('OUT.edit', compact('courrier'));
         } else
@@ -105,7 +105,7 @@ class OutCourrierController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if (Auth::check() && Auth()->user()->role == 'admin') {
+        if (Auth::check() && Auth()->user()->role != 'dv') {
             $updateData = $request->validate([
                 'expediteur' => 'required|max:255',
                 'recepteur' => 'required|max:255',
@@ -132,7 +132,7 @@ class OutCourrierController extends Controller
      */
     public function destroy($id)
     {
-        if (Auth::check() && Auth()->user()->role == 'admin') {
+        if (Auth::check() && Auth()->user()->role != 'dv') {
             $courrier = Courrier::findOrFail($id);
             $courrier->delete();
 
