@@ -77,16 +77,28 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-row push-top">
+                        <ul>
+                            @foreach($courrier->documents as $document)
+                                <li class="list-group-item w-100">
+                                    <label for="filename">Piece joint: {{ $document->filename }}
+                                        <a class="btn btn-primary btn-lg form-control"
+                                           href="{{ route('download/',$document->filename) }}">Telecharger</a>
+                                    </label>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
                 @endif
             </form>
-            <div class="card-footer text-muted">
-                <div class="row text-center">
-                    <a href="{{ route('courriers_OUT.index') }}"
-                       class="card-link col-md-4 d-inline-block">Retourner à l'index</a>
-                    <p class="col-md-4">Montrer un courrier</p>
-                    @if(Auth()->user()->role == 'admin' or Auth()->user()->role == 'bo')
-                        <a href="{{ route('courriers_OUT.create') }}"
-                           class="card-link col-md-4 d-inline-block">Créer un nouveau courrier</a>
+                <div class="card-footer text-muted">
+                    <div class="row text-center">
+                        <a href="{{ route('courriers_OUT.index') }}"
+                           class="card-link col-md-4 d-inline-block">Retourner à l'index</a>
+                        <p class="col-md-4">Montrer un courrier</p>
+                        @if(Auth()->user()->role == 'admin' or Auth()->user()->role == 'bo')
+                            <a href="{{ route('courriers_OUT.create') }}"
+                               class="card-link col-md-4 d-inline-block">Créer un nouveau courrier</a>
                     @endif
                 </div>
             </div>

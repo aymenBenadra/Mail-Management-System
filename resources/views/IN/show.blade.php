@@ -156,9 +156,9 @@
                             @csrf
                             @method('PATCH')
                         @endif
-                            <label for="traitement">Traitement</label>
-                            <textarea rows="8" cols="50" class="form-control" placeholder="traitement"
-                                      name="traitement" id="traitement" readonly>{{ $courrier->traitement }}</textarea>
+                        <label for="traitement">Traitement</label>
+                        <textarea rows="8" cols="50" class="form-control" placeholder="traitement"
+                                  name="traitement" id="traitement" readonly>{{ $courrier->traitement }}</textarea>
                     </div>
                     <?php if (Auth()->user()->role == 'admin') {
                         echo('</div>');
@@ -184,16 +184,28 @@
                         <input type="hidden" value="1" name="statut" readonly/>
                     </div>
                 @endif
+                <div class="form-row push-top">
+                    <ul>
+                        @foreach($courrier->documents as $document)
+                            <li class="list-group-item w-100">
+                                <label for="filename">Piece joint: {{ $document->filename }}
+                                    <a class="btn btn-primary btn-lg form-control"
+                                       href="{{ route('download/',$document->filename) }}">Telecharger</a>
+                                </label>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
             </form>
-            <div class="card-footer text-muted">
-                <div class="row text-center">
-                    <a href="{{ route('courriers_'.Auth()->user()->role.'.index') }}"
-                       class="card-link col-md-4 d-inline-block">Retourner à l'index</a>
-                    <p class="col-md-4">Montrer un courrier</p>
-                    @if(Auth()->user()->role == 'admin' or Auth()->user()->role == 'bo')
-                        <a href="{{ route('courriers_'.Auth()->user()->role.'.create') }}"
-                           class="card-link col-md-4 d-inline-block">Créer un nouveau courrier</a>
-                    @endif
+                <div class="card-footer text-muted">
+                    <div class="row text-center">
+                        <a href="{{ route('courriers_'.Auth()->user()->role.'.index') }}"
+                           class="card-link col-md-4 d-inline-block">Retourner à l'index</a>
+                        <p class="col-md-4">Montrer un courrier</p>
+                        @if(Auth()->user()->role == 'admin' or Auth()->user()->role == 'bo')
+                            <a href="{{ route('courriers_'.Auth()->user()->role.'.create') }}"
+                               class="card-link col-md-4 d-inline-block">Créer un nouveau courrier</a>
+                        @endif
                 </div>
             </div>
         </div>
