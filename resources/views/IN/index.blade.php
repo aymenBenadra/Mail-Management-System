@@ -1,5 +1,8 @@
 @extends('indexLayout')
 <?php
+/**
+ * a function to manage the length of the text shown in the table cells.
+*/
 function custom_echo($x, $length)
 {
     if (strlen($x) <= $length) {

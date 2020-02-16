@@ -8,7 +8,12 @@ use Illuminate\Support\Facades\Storage;
 
 class DownloadController extends Controller
 {
-
+    /**
+     * Downloads a document when requested.
+     *
+     * @param string $filename
+     * @return Response
+     */
     public function download($filename)
     {
         //$file = Storage::get($request->filepath);

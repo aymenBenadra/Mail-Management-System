@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 class LoginProcessController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * redirect the user after the login process.
      *
      * @return Response
      */
@@ -37,7 +37,7 @@ class LoginProcessController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Log the user in if the credentials are correct and if it exists in the database.
      *
      * @param Request $request
      * @return RedirectResponse|Redirector
@@ -73,7 +73,7 @@ class LoginProcessController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Log out from the system and remove the session.
      *
      * @return RedirectResponse|Redirector
      */

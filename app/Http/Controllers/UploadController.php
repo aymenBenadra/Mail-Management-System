@@ -8,11 +8,21 @@ use Illuminate\Support\Facades\Auth;
 
 class UploadController extends Controller
 {
+    /**
+     * Display The files upload form if requested.
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function uploadForm()
     {
         return view('file');
     }
 
+    /**
+     * upload the file if all the requirements are met.
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function uploadSubmit(UploadRequest $request)
     {
         $courrier = $request->ref;

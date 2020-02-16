@@ -4,7 +4,7 @@
 
     <div class="card push-top push-bottom text-center">
         <div class="card-header">
-            Login
+            Se connecter
         </div>
         <div class="card-body">
             @if ($errors->any())
@@ -29,7 +29,7 @@
                         <input type="password" class="form-control" style="max-width: 500px; text-align: center"
                                name="password" id="password"/></label>
                 </div>
-                <button type="submit" class="btn btn-block btn-primary">Login</button>
+                <button type="submit" class="btn btn-block btn-primary">Se connecter</button>
             </form>
         </div>
     </div>

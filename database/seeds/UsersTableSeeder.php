@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\Hash;
 
 class UsersTableSeeder extends Seeder
 {
-
+    /**
+     * Adds the users to the users table in the database.
+     */
     public function run()
     {
         DB::table('users')->delete();

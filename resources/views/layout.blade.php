@@ -58,9 +58,9 @@
 
     <div class="top-right links">
         @auth
-            <a href="{{ url('logout') }}">Logout - {{ Auth()->user()->name }}</a>
+            <a href="{{ url('logout') }}">Vous déconnecter - {{ Auth()->user()->name }}</a>
         @else
-            <a href="{{ route('login') }}">Login</a>
+            <a href="{{ route('login') }}">Se connecter</a>
         @endauth
     </div>
 </nav>

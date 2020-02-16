@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class ArchiveController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the archive of resources.
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */

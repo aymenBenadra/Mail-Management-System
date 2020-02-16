@@ -14,38 +14,50 @@
 // Main controllers for all user grades
 use Illuminate\Support\Facades\Route;
 
-// Archive routes
+/** 
+ * Routes to get the archived courriers for each user Role and for each type of courrier [IN/OUT].
+ * 
+ * @var string type
+ */
 Route::get('courriers_admin/archive/{type}', 'ArchiveController@archive')->name('courriers_admin.archive');
 Route::get('courriers_dv/archive/{type}', 'ArchiveController@archive')->name('courriers_dv.archive');
 Route::get('courriers_dr/archive/{type}', 'ArchiveController@archive')->name('courriers_dr.archive');
 Route::get('courriers_bo/archive/{type}', 'ArchiveController@archive')->name('courriers_bo.archive');
 
-// Main routes to create, index, show, update, destroy...
+/** 
+ * Main routes to Create, Read, Update, and Destroy the courriers for each user Role
+*/
 Route::resource('courriers_admin', 'ADMINCourrierController');
 Route::resource('courriers_dv', 'DVCourrierController');
 Route::resource('courriers_bo', 'BOCourrierController');
 Route::resource('courriers_dr', 'DRCourrierController');
 Route::resource('courriers_OUT', 'OutCourrierController');
 
-// Login route
+/**
+ * Routes to manage Login and Logout from the session.
+*/
 Route::get('login', 'LoginProcessController@login')->name('login');
-
-// a post method to check if the user infos are good to go or not.
 Route::post('loginCheck', 'LoginProcessController@loginCheck')->name('loginCheck');
-
-// Logout route to forget user token and get to login page
 Route::get('logout', 'LoginProcessController@logout')->name('logout');
 
-// Home Route
+/**
+ * The main Route to manage the newcomers and redirections to the root directory.
+*/
 Route::get('/', 'LoginProcessController@login')->name('Home');
 
-// Cloture routes
+/**
+ * Routes to manage courriers cloturing requests.
+*/
 Route::get('courriers_admin/{id}', 'ADMINCourrierController@cloture')->name('courriers_admin.cloture');
 Route::get('courriers_dr/{id}', 'DRCourrierController@cloture')->name('courriers_dr.cloture');
 
-// Files upload routes
+/**
+ * Routes to manage attachments uploading and Upload form requests.
+*/
 Route::get('upload', 'UploadController@uploadForm')->name('uploadForm');
 Route::post('upload', 'UploadController@uploadSubmit')->name('upload');
 
-// Files download route
+/**
+ * Route that manages attachments Download requests.
+*/
 Route::get('download/{filename}', 'DownloadController@download')->name('download/');
