@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateCourriersTable extends Migration
 {
-    //TODO: add output mails.
-    //TODO: fix the counter issues.
-
     /**
      * The proposed ref_update trigger for id counter
      *
