@@ -47,12 +47,22 @@ class BOCourrierController extends Controller
                 'sujet' => 'required|max:255',
                 'corps' => 'max:500',
                 'type' => 'max:5',
+                'traiterPar' => 'max:255',
                 'commentaires' => 'max:500',
                 'objet' => 'required|max:255',
                 'urgence' => 'required|numeric',
                 'statut' => 'required|numeric',
                 'dateReception' => 'required|date',
             ]);
+            $traits = $request->input('traiterPar');
+            $string = '';
+            if (isset($traits))
+                foreach ($traits as $trait) {
+                    $string .= $trait;
+                    $string .= ',';
+                }
+
+            $storeData['traiterPar'] = $string;
             Courrier::create($storeData);
 
             return redirect('/courriers_bo')->with('completed', 'Courrier has been saved!');

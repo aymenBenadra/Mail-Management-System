@@ -59,7 +59,7 @@ function custom_echo($x, $length)
             <tbody>
             <?php $i = 0; ?>
             @foreach($courrier as $courriers)
-                @if($courriers->statut < 3 and $courriers->type == 'out')
+                @if($courriers->type == 'out')
                     <tr>
                         <td class="bs-checkbox">
                             <label>

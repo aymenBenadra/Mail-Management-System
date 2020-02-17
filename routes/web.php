@@ -14,19 +14,19 @@
 // Main controllers for all user grades
 use Illuminate\Support\Facades\Route;
 
-/** 
+/**
  * Routes to get the archived courriers for each user Role and for each type of courrier [IN/OUT].
- * 
+ *
  * @var string type
  */
-Route::get('courriers_admin/archive/{type}', 'ArchiveController@archive')->name('courriers_admin.archive');
-Route::get('courriers_dv/archive/{type}', 'ArchiveController@archive')->name('courriers_dv.archive');
-Route::get('courriers_dr/archive/{type}', 'ArchiveController@archive')->name('courriers_dr.archive');
-Route::get('courriers_bo/archive/{type}', 'ArchiveController@archive')->name('courriers_bo.archive');
+Route::get('courriers_admin/archive', 'ArchiveController@archive')->name('courriers_admin.archive');
+Route::get('courriers_dv/archive', 'ArchiveController@archive')->name('courriers_dv.archive');
+Route::get('courriers_dr/archive', 'ArchiveController@archive')->name('courriers_dr.archive');
+Route::get('courriers_bo/archive', 'ArchiveController@archive')->name('courriers_bo.archive');
 
-/** 
+/**
  * Main routes to Create, Read, Update, and Destroy the courriers for each user Role
-*/
+ */
 Route::resource('courriers_admin', 'ADMINCourrierController');
 Route::resource('courriers_dv', 'DVCourrierController');
 Route::resource('courriers_bo', 'BOCourrierController');
@@ -60,4 +60,4 @@ Route::post('upload', 'UploadController@uploadSubmit')->name('upload');
 /**
  * Route that manages attachments Download requests.
 */
-Route::get('download/{filename}', 'DownloadController@download')->name('download/');
+Route::get('download/{filepath}/{filename}', 'DownloadController@download')->name('download/');

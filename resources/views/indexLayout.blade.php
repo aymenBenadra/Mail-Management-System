@@ -71,7 +71,8 @@
                     <span>Courrier reçu</span>
                     @if(Auth()->user()->role == 'bo' or Auth()->user()->role == 'admin')
                         <a class="d-flex align-items-center text-muted"
-                           href="{{route('courriers_'.Auth()->user()->role.'.create')}}" aria-label="Add a new courrier"
+                           href="{{route('courriers_'.Auth()->user()->role.'.create')}}"
+                           aria-label="Créer un nouveau courrier"
                            title="Add a new courrier">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                  fill="none"
@@ -92,7 +93,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('courriers_'.Auth()->user()->role.'.archive','IN') }}">
+                        <a class="nav-link" href="{{ route('courriers_'.Auth()->user()->role.'.archive') }}">
                             <i class="fas fa-archive"></i>
                             Archive
                         </a>
@@ -111,7 +112,7 @@
                         @if(Auth()->user()->role == "admin" or Auth()->user()->role == "bo")
                             <a class="d-flex align-items-center text-muted" href="{{ route('courriers_OUT.create') }}"
                                aria-label="Add a new report"
-                               title="Add a new courrier">
+                               title="Créer un nouveau courrier">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                      fill="none"
                                      stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -128,13 +129,8 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('courriers_OUT.index') }}">
                                 <i class="fas fa-sync"></i>
-                                Courrier actifs
+                                Archive
                             </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('courriers_'.Auth()->user()->role.'.archive','OUT') }}">
-                                <i class="fas fa-archive"></i>
-                                Archive                            </a>
                         </li>
                         @if(Auth()->user()->role == "admin" or Auth()->user()->role == "bo")
                             <li class="nav-item">

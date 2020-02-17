@@ -56,7 +56,7 @@ class OutCourrierController extends Controller
             ]);
             Courrier::create($storeData);
 
-            return redirect('/courriers_admin')->with('completed', 'Courrier has been saved!');
+            return redirect('/courriers_' . Auth()->user()->role)->with('completed', 'Courrier has been saved!');
         } else
             return view('login')->with('Warning!', 'login first to get to this page.');
 
@@ -118,7 +118,7 @@ class OutCourrierController extends Controller
             ]);
             Courrier::whereId($id)->update($updateData);
 
-            return redirect('/courriers_admin')->with('completed', 'Courrier has been updated');
+            return redirect('/courriers_' . Auth()->user()->role)->with('completed', 'Courrier has been updated');
         } else
             return view('login')->with('Warning!', 'login first to get to this page.');
     }
@@ -136,7 +136,7 @@ class OutCourrierController extends Controller
             $courrier = Courrier::findOrFail($id);
             $courrier->delete();
 
-            return redirect('/courriers_admin')->with('completed', 'Courrier has been deleted');
+            return redirect('/courriers_' . Auth()->user()->role)->with('completed', 'Courrier has been deleted');
         } else
             return view('login')->with('Warning!', 'login first to get to this page.');
 

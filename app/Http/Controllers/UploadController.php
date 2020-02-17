@@ -25,17 +25,32 @@ class UploadController extends Controller
      */
     public function uploadSubmit(UploadRequest $request)
     {
-        $courrier = $request->ref;
-        foreach ($request->attachments as $attachment) {
-            $filepath = $attachment->store('attachments', 'public');
-            $filename = basename($filepath);
-            $ext = pathinfo($filename, PATHINFO_EXTENSION);
-            Document::create([
-                'courrier_id' => $courrier,
-                'filepath' => $filepath,
-                'filename' => $filename,
-                'type' => $ext
-            ]);
+        if (Auth()->user()->role != 'dv') {
+            $courrier = $request->ref;
+            foreach ($request->attachments as $attachment) {
+                $filepath = $attachment->store('attachments_de_courrier', 'public');
+                $filename = basename($filepath);
+                $ext = pathinfo($filename, PATHINFO_EXTENSION);
+                Document::create([
+                    'courrier_id' => $courrier,
+                    'filepath' => $filepath,
+                    'filename' => $filename,
+                    'type' => $ext
+                ]);
+            }
+        } else {
+            $courrier = $request->ref;
+            foreach ($request->attachments as $attachment) {
+                $filepath = $attachment->store('attachments_de_traitement', 'public');
+                $filename = basename($filepath);
+                $ext = pathinfo($filename, PATHINFO_EXTENSION);
+                Document::create([
+                    'courrier_id' => $courrier,
+                    'filepath' => $filepath,
+                    'filename' => $filename,
+                    'type' => $ext
+                ]);
+            }
         }
         session()->flash('message', 'File uploaded successfully!');
         session()->flash('alert-class', 'alert-success');

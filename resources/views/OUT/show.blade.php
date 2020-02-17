@@ -81,9 +81,9 @@
                         <ul>
                             @foreach($courrier->documents as $document)
                                 <li class="list-group-item w-100">
-                                    <label for="filename">Piece joint: {{ $document->filename }}
+                                    <label for="filename">Piece joint:
                                         <a class="btn btn-primary btn-lg form-control"
-                                           href="{{ route('download/',$document->filename) }}">Telecharger</a>
+                                           href="{{ route('download/',$document->filepath) }}">Telecharger</a>
                                     </label>
                                 </li>
                             @endforeach

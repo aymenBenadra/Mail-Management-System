@@ -103,9 +103,18 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="urgence">Urgence<span style="color: darkred">*</span></label>
-                            <input type="number" max="3" min="1" class="form-control"
-                                   name="urgence" id="urgence"/>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="urgence">Urgence<span
+                                            style="color: darkred">*</span> :</label>
+                                </div>
+                                <select class="custom-select" id="urgence" name="urgence">
+                                    <option selected>Choisir...</option>
+                                    <option value="1">Urgent</option>
+                                    <option value="2">M'en parler</option>
+                                    <option value="3">A classer</option>
+                                </select>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="dateReception">Date reception<span style="color: darkred">*</span></label>
@@ -135,10 +144,20 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="statut">Statut<span style="color: darkred">*</span></label>
-                                <input type="number" max="3" min="1" class="form-control"
-                                       name="statut" id="statut"/>
+                            <div class="form-group push-top">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text" for="statut">Statut<span
+                                                style="color: darkred">*</span> :</label>
+                                    </div>
+                                    <select class="custom-select" id="statut" name="statut">
+                                        <option selected>Choisir...</option>
+                                        <option value="1">Saisi</option>
+                                        <option value="2">Verifier</option>
+                                        <option value="3">Traiter</option>
+                                        <option value="4">Cloturé</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>

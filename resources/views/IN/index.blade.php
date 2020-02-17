@@ -63,7 +63,7 @@ function custom_echo($x, $length)
             <?php $i = 0; ?>
             @foreach($courrier as $courriers)
                 @if(Auth()->user()->role != 'dv')
-                    @if($courriers->statut < 3 and $courriers->type == 'in')
+                    @if($courriers->statut < 4 and $courriers->type == 'in')
                         <tr>
                             <td class="bs-checkbox">
                                 <label>
@@ -76,8 +76,33 @@ function custom_echo($x, $length)
                             <td>{{ custom_echo( $courriers->sujet, 12) }}</td>
                             <td>{{ custom_echo( $courriers->objet, 12) }}</td>
                             <td>{{ custom_echo( $courriers->traiterPar, 12) }}</td>
-                            <td>{{ custom_echo( $courriers->urgence, 12) }}</td>
-                            <td>{{ custom_echo( $courriers->statut, 12) }}</td>
+                            <td>
+                                @switch($courriers->urgence)
+                                    @case(1) <span class="badge badge-pill badge-danger w-100">Urgent</span>
+                                    @break
+                                    @case(2) <span class="badge badge-pill badge-secondary w-100">M'en parler</span>
+                                    @break
+                                    @case(3) <span class="badge badge-pill badge-light w-100">A classer</span>
+                                    @break
+                                    @default ''
+                                    @break
+                                @endswitch
+                            </td>
+                            <td>
+                                @switch($courriers->statut)
+                                    @case(1) <span class="badge badge-pill badge-info w-100">Saisi</span>
+                                    @break
+                                    @case(2) <span class="badge badge-pill badge-success w-100">Verifier</span>
+                                    @break
+                                    @case(3) <span class="badge badge-pill badge-primary w-100">Traiter</span>
+                                    @break
+                                    @case(4) <span class="badge badge-pill badge-secondary w-100">Cloturé</span>
+                                    @break
+                                    @default ''
+                                    @break
+                                @endswitch
+                            </td>
+
                             <td>{{ custom_echo( $courriers->dateReception, 12) }}</td>
                             <td>
                                 <a href="{{ route('courriers_'.Auth()->user()->role.'.show', $courriers->id)}}"
@@ -224,7 +249,7 @@ function custom_echo($x, $length)
                                         <div class="form-group hide" hidden>
                                             @csrf
                                             @method('PATCH')
-                                            <input type="hidden" value="3" name="statut"/>
+                                            <input type="hidden" value="4" name="statut"/>
                                         </div>
                                         <button type="submit" class="btn btn-info"><i class="fas fa-box-open"></i>
                                         </button>
@@ -234,7 +259,7 @@ function custom_echo($x, $length)
                         </tr>
                     @endif
                 @else
-                    @if( strpos($courriers->traiterPar, Auth()->user()->name) !== false and $courriers->statut < 3 and $courriers->type == 'in')
+                    @if( strpos($courriers->traiterPar, Auth()->user()->name) !== false and $courriers->statut < 4 and $courriers->type == 'in')
                         <tr>
                             <td class="bs-checkbox">
                                 <label>
@@ -247,8 +272,32 @@ function custom_echo($x, $length)
                             <td>{{ custom_echo( $courriers->sujet, 12) }}</td>
                             <td>{{ custom_echo( $courriers->objet, 12) }}</td>
                             <td>{{ custom_echo( $courriers->traiterPar, 12) }}</td>
-                            <td>{{ custom_echo( $courriers->urgence, 12) }}</td>
-                            <td>{{ custom_echo( $courriers->statut, 12) }}</td>
+                            <td>
+                                @switch($courriers->urgence)
+                                    @case(1) <span class="badge badge-pill badge-danger w-100">Urgent</span>
+                                    @break
+                                    @case(2) <span class="badge badge-pill badge-secondary w-100">M'en parler</span>
+                                    @break
+                                    @case(3) <span class="badge badge-pill badge-light w-100">A classer</span>
+                                    @break
+                                    @default ''
+                                    @break
+                                @endswitch
+                            </td>
+                            <td>
+                                @switch($courriers->statut)
+                                    @case(1) <span class="badge badge-pill badge-info w-100">Saisi</span>
+                                    @break
+                                    @case(2) <span class="badge badge-pill badge-success w-100">Verifier</span>
+                                    @break
+                                    @case(3) <span class="badge badge-pill badge-primary w-100">Traiter</span>
+                                    @break
+                                    @case(4) <span class="badge badge-pill badge-secondary w-100">Cloturé</span>
+                                    @break
+                                    @default ''
+                                    @break
+                                @endswitch
+                            </td>
                             <td>{{ custom_echo( $courriers->dateReception, 12) }}</td>
                             <td>
                                 <a href="{{ route('courriers_'.Auth()->user()->role.'.show', $courriers->id)}}"

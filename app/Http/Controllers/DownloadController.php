@@ -11,13 +11,14 @@ class DownloadController extends Controller
     /**
      * Downloads a document when requested.
      *
+     * @param string $filepath
      * @param string $filename
      * @return Response
      */
-    public function download($filename)
+    public function download($filepath, $filename)
     {
         //$file = Storage::get($request->filepath);
         //return \response()->download($file);
-        return \response()->download(storage_path().'/App/public/attachments/'.$filename);
+        return \response()->download(storage_path() . '/App/public/' . $filepath . '/' . $filename);
     }
 }
