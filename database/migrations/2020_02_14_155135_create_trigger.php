@@ -19,7 +19,7 @@ class CreateTrigger extends Migration
                 IF((select COUNT(*) from courriers) < 1 or DATE_FORMAT(NEW.dateReception, \'%y\') not in( (select DATE_FORMAT(dateReception, \'%y\') from courriers) )) then
                     SET NEW.id = (DATE_FORMAT(NEW.dateReception, \'%y\'))+1000;
                 ELSE
-                    SET NEW.id = (select MAX(id) + 1000 from courriers where MOD(id,100) = DATE_FORMAT(NEW.dateReception, \'%y\') ORDER by id DESC LIMIT 1);
+                    SET NEW.id = (select MAX(id) + 1000 from courriers where MOD(id,100) = DATE_FORMAT(NEW.dateReception, \'%y\') GROUP BY type ORDER by id DESC LIMIT 1);
                 END IF;
             END
         ');

@@ -86,6 +86,7 @@ class DVCourrierController extends Controller
         if (Auth::check() && Auth()->user()->role == 'dv') {
             $updateData = $request->validate([
                 'traitement' => 'required|max:500',
+                'statut' => 'required|numeric',
             ]);
             Courrier::whereId($id)->update($updateData);
             return redirect('/courriers_dv')->with('completed', 'Courrier has been updated');
