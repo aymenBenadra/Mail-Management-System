@@ -14,21 +14,15 @@ class UsersTableSeeder extends Seeder
     {
         DB::table('users')->delete();
         User::create(array(
-            'name'     => 'Mohammed-Aymen Benadra',
-            'username' => 'aymmax',
-            'password' => Hash::make('aymben123'),
-            'role'     => 'admin',
-        ));
-        User::create(array(
-            'name'     => 'Lucy',
-            'username' => 'lucy',
-            'password' => Hash::make('aymben123'),
+            'name' => 'BO',
+            'username' => 'bo',
+            'password' => Hash::make('ausybo'),
             'role' => 'bo',
         ));
         User::create(array(
-            'name' => 'Lily',
-            'username' => 'lily',
-            'password' => Hash::make('aymben123'),
+            'name' => 'DR',
+            'username' => 'dr',
+            'password' => Hash::make('ausydr'),
             'role' => 'dr',
         ));
 
@@ -36,49 +30,49 @@ class UsersTableSeeder extends Seeder
         User::create(array(
             'name' => 'DEU',
             'username' => 'deu',
-            'password' => Hash::make('aymben123'),
+            'password' => Hash::make('ausydeu'),
             'role' => 'dv',
         ));
         User::create(array(
             'name' => 'DGU',
             'username' => 'dgu',
-            'password' => Hash::make('aymben123'),
+            'password' => Hash::make('ausydgu'),
             'role' => 'dv',
         ));
         User::create(array(
             'name' => 'DAJF',
             'username' => 'dajf',
-            'password' => Hash::make('aymben123'),
+            'password' => Hash::make('ausydajf'),
             'role' => 'dv',
         ));
         User::create(array(
             'name' => 'DAF',
             'username' => 'daf',
-            'password' => Hash::make('aymben123'),
+            'password' => Hash::make('ausydaf'),
             'role' => 'dv',
         ));
         User::create(array(
             'name' => 'Mr Chafki',
             'username' => 'chafki',
-            'password' => Hash::make('aymben123'),
+            'password' => Hash::make('ausychafki'),
             'role' => 'dv',
         ));
         User::create(array(
             'name' => 'Mr Abdouh',
             'username' => 'abdouh',
-            'password' => Hash::make('aymben123'),
+            'password' => Hash::make('ausyabdouh'),
             'role' => 'dv',
         ));
         User::create(array(
             'name' => 'SI',
             'username' => 'si',
-            'password' => Hash::make('aymben123'),
-            'role' => 'dv',
+            'password' => Hash::make('ausysi'),
+            'role' => 'admin',
         ));
         User::create(array(
             'name' => 'SD',
             'username' => 'sd',
-            'password' => Hash::make('aymben123'),
+            'password' => Hash::make('ausysd'),
             'role' => 'dv',
         ));
     }

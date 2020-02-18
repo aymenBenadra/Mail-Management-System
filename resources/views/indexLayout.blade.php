@@ -35,11 +35,22 @@
           href='https://rawgit.com/vitalets/x-editable/master/dist/bootstrap3-editable/css/bootstrap-editable.css'>
     <script src="https://kit.fontawesome.com/14a2f146e1.js" crossorigin="anonymous"></script>
 
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ URL::asset("apple-touch-icon.png") }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ URL::asset("favicon-32x32.png") }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ URL::asset("favicon-16x16.png") }}">
+    <link rel="manifest" href="{{ URL::asset("site.webmanifest") }}">
+    <link rel="mask-icon" href="{{ URL::asset("safari-pinned-tab.svg") }}" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+
+
 </head>
 <body>
 
 <nav class="navbar navbar-light bg-light">
-    <a class="navbar-brand" href="{{ route('login') }}">Courrier Management System</a>
+    <a class="navbar-brand" href="{{ route('login') }}"><img src="{{ URL::asset("favicon-32x32.png") }}" width="40"
+                                                             height="40" alt="Ausy Logo">Courrier Management System</a>
 
     <div class="top-right links">
         @auth
